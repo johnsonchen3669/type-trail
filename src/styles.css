@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --paper: #eef6f6;
+  --ink: #071c2c;
+  --blue: #2457ff;
+  --mint: #c9f55a;
+  --coral: #ff6542;
+  --muted: #536a75;
+  --line: #b9cbcf;
+  color-scheme: light;
+  font-family: 'Noto Sans TC', 'PingFang TC', sans-serif;
+  font-synthesis: none;
+}
+
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; background: var(--paper); color: var(--ink); }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.font-mono { font-family: 'Space Mono', 'SFMono-Regular', Consolas, monospace; }
+.trail-grid {
+  background-image: linear-gradient(to right, rgba(7, 28, 44, 0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(7, 28, 44, 0.055) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+.option-row:has(input:checked) {
+  border-color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 5%, white);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}

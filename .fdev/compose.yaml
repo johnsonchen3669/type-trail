@@ -1,0 +1,5 @@
+services:
+  app:
+    environment:
+      NPM_CONFIG_CACHE: /tmp/type-trail-npm-cache
+      NG_CLI_ANALYTICS: "false"
