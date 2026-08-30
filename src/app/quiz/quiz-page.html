@@ -28,13 +28,13 @@
 
 <section class="mx-auto max-w-[980px] px-5 py-14 sm:px-8 sm:py-20">
   <div class="relative">
-    <div class="absolute bottom-12 left-6 top-10 w-px bg-[var(--line)] sm:left-8" aria-hidden="true"></div>
+    <div class="absolute bottom-12 left-8 top-10 hidden w-px bg-[var(--line)] sm:block" aria-hidden="true"></div>
 
     <div class="space-y-10 sm:space-y-14">
       @for (question of quiz.questions; track question.id) {
-        <article class="relative pl-16 sm:pl-24" [attr.data-question-id]="question.id">
+        <article class="relative sm:pl-24" [attr.data-question-id]="question.id">
           <div
-            class="absolute left-0 top-0 z-10 grid size-12 place-items-center rounded-full border-2 bg-[var(--paper)] font-mono text-sm font-bold sm:size-16"
+            class="relative z-10 mb-3 grid size-10 place-items-center rounded-full border-2 bg-[var(--paper)] font-mono text-xs font-bold sm:absolute sm:left-0 sm:top-0 sm:mb-0 sm:size-16 sm:text-sm"
             [class.border-red-500]="isMissing(question.id)"
             [class.border-[var(--line)]]="!submitted() && !isMissing(question.id)"
             [class.bg-[var(--mint)]]="submitted() && isCorrect(question)"
@@ -45,7 +45,7 @@
             @if (submitted()) { <span aria-hidden="true">{{ isCorrect(question) ? '✓' : '×' }}</span> } @else { {{ question.number.toString().padStart(2, '0') }} }
           </div>
 
-          <div class="rounded-[1.75rem] border border-[var(--line)] bg-white p-5 shadow-[0_12px_40px_rgba(5,27,42,0.05)] sm:p-8">
+          <div class="rounded-[1.5rem] border border-[var(--line)] bg-white p-4 shadow-[0_12px_40px_rgba(5,27,42,0.05)] sm:rounded-[1.75rem] sm:p-8">
             <p class="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--blue)]">學習目標 · {{ question.learningGoal }}</p>
             <h2 class="mt-4 text-xl font-black leading-relaxed tracking-[-0.02em] text-[var(--ink)] sm:text-2xl">{{ question.prompt }}</h2>
 
@@ -57,7 +57,7 @@
               <fieldset class="mt-7 space-y-3" [disabled]="submitted()">
                 <legend class="sr-only">第 {{ question.number }} 題選項</legend>
                 @for (option of optionsFor(question); track option.id) {
-                  <label class="option-row flex cursor-pointer items-start gap-4 rounded-2xl border border-[var(--line)] px-4 py-4 transition hover:border-[var(--blue)] hover:bg-[color:var(--blue)/0.035] sm:px-5">
+                  <label class="option-row flex cursor-pointer items-start gap-3 rounded-2xl border border-[var(--line)] px-3 py-4 transition hover:border-[var(--blue)] hover:bg-[color:var(--blue)/0.035] sm:gap-4 sm:px-5">
                     <input class="peer sr-only" type="radio" [name]="question.id" [value]="option.id" [checked]="answerFor(question.id) === option.id" (change)="setAnswer(question.id, option.id)" />
                     <span class="grid size-8 shrink-0 place-items-center rounded-full border border-[var(--line)] font-mono text-xs font-bold peer-checked:border-[var(--blue)] peer-checked:bg-[var(--blue)] peer-checked:text-white">{{ option.id }}</span>
                     <span class="pt-1 text-[15px] leading-6 text-[var(--ink)]">{{ option.label }}</span>
