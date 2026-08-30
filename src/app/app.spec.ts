@@ -17,7 +17,8 @@ describe('App routing', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('每天走深一點');
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('開始測驗');
+    const pageText = (fixture.nativeElement as HTMLElement).textContent?.replace(/\s+/g, '');
+    expect(pageText).toContain('每天走深一點');
+    expect(pageText).toContain('開始測驗');
   });
 });

@@ -1,17 +1,18 @@
 <section class="relative isolate">
-  <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] overflow-hidden" aria-hidden="true">
-    <div class="absolute -right-32 top-16 size-[420px] rounded-full border-[70px] border-[var(--blue)] opacity-[0.07]"></div>
+  <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[500px] overflow-hidden sm:h-[560px]" aria-hidden="true">
+    <div class="absolute -right-32 top-16 hidden size-[420px] rounded-full border-[70px] border-[var(--blue)] opacity-[0.07] lg:block"></div>
     <div class="trail-grid absolute inset-0 opacity-70"></div>
   </div>
-  <div class="mx-auto grid max-w-[1180px] gap-14 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:pb-28 lg:pt-32">
+  <div class="mx-auto grid max-w-[1180px] gap-14 px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:pb-28 lg:pt-32">
     <div>
-      <p class="mb-7 flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--blue)]"><span class="h-px w-10 bg-current"></span>30 天型別探索計畫</p>
-      <h1 class="whitespace-nowrap text-[clamp(3rem,6.4vw,6.2rem)] font-black leading-none tracking-[-0.065em] text-[var(--ink)]">
-        每天走深一<span class="text-[var(--blue)]">點</span>
+      <p class="mb-5 flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--blue)] sm:mb-7 sm:text-xs sm:tracking-[0.22em]"><span class="h-px w-8 bg-current sm:w-10"></span>30 天型別探索計畫</p>
+      <h1 class="text-[clamp(3rem,8vw,7.5rem)] font-black leading-[0.96] tracking-[-0.075em] text-[var(--ink)] sm:leading-[0.94]">
+        <span class="block whitespace-nowrap">每天走深</span>
+        <span class="relative mt-[0.08em] block w-fit text-[var(--blue)]">一點<svg class="absolute -bottom-[0.06em] left-0 w-full text-[var(--coral)]" viewBox="0 0 220 18" fill="none" aria-hidden="true"><path d="M2 12C61 4 134 4 218 9" stroke="currentColor" stroke-width="5" stroke-linecap="round" /></svg></span>
       </h1>
-      <p class="mt-10 max-w-xl text-lg leading-8 text-[var(--muted)] sm:text-xl">看完文章，用五個精準問題確認自己真的理解。不是背答案，而是練習判斷程式是否遵守契約。</p>
+      <p class="mt-8 max-w-xl text-base leading-7 text-[var(--muted)] sm:mt-10 sm:text-xl sm:leading-8">看完文章，用五個精準問題確認自己真的理解。不是背答案，而是練習判斷程式是否遵守契約。</p>
     </div>
-    <aside class="relative border-l-2 border-[var(--ink)] pl-8 lg:mb-2 lg:pl-10">
+    <aside class="relative hidden border-l-2 border-[var(--ink)] pl-8 lg:mb-2 lg:block lg:pl-10">
       <div class="absolute -left-[13px] top-0 grid size-6 place-items-center rounded-full bg-[var(--mint)] ring-4 ring-[var(--paper)]"><span class="size-2 rounded-full bg-[var(--ink)]"></span></div>
       <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Your field guide</p>
       <p class="mt-4 text-2xl font-bold leading-snug text-[var(--ink)]">從 JavaScript Runtime，一路走到 AI Agent。</p>
@@ -25,7 +26,7 @@
 </section>
 
 <section class="bg-[var(--ink)] text-white">
-  <div class="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+  <div class="mx-auto max-w-[1180px] px-5 py-12 sm:px-8 sm:py-20 lg:px-10">
     <div class="mb-9 flex items-end justify-between gap-5">
       <div><p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--mint)]">Trailhead / 起點</p><h2 class="mt-3 text-3xl font-black tracking-tight sm:text-4xl">今天從這裡出發</h2></div>
       <span class="hidden font-mono text-xs text-white/50 sm:block">01 — 30</span>
