@@ -2,6 +2,7 @@ import { provideRouter } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { QuizPage } from './quiz-page';
+import { dayOneQuiz } from './day-01.data';
 
 describe('QuizPage', () => {
   beforeEach(async () => {
@@ -15,6 +16,8 @@ describe('QuizPage', () => {
 
   it('keeps answers hidden and marks unanswered questions', () => {
     const fixture = TestBed.createComponent(QuizPage);
+    fixture.componentRef.setInput('quiz', dayOneQuiz);
+    fixture.componentRef.setInput('articleUrl', 'https://example.com/day-1');
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
 
@@ -28,6 +31,8 @@ describe('QuizPage', () => {
 
   it('submits a perfect attempt and reveals all explanations', () => {
     const fixture = TestBed.createComponent(QuizPage);
+    fixture.componentRef.setInput('quiz', dayOneQuiz);
+    fixture.componentRef.setInput('articleUrl', 'https://example.com/day-1');
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
 

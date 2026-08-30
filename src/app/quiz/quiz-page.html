@@ -4,11 +4,12 @@
     <a class="mb-8 inline-flex items-center gap-2 font-mono text-xs font-bold text-[var(--blue)] hover:underline" routerLink="/"><span aria-hidden="true">←</span> 返回路線圖</a>
     <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
       <div>
-        <p class="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--coral)]">Checkpoint 01 / 30</p>
-        <h1 class="mt-4 max-w-4xl text-4xl font-black leading-[1.05] tracking-[-0.045em] text-[var(--ink)] sm:text-6xl">{{ quiz.title }}</h1>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--coral)]">Checkpoint {{ quiz().day.toString().padStart(2, '0') }} / 30</p>
+        <h1 class="mt-4 max-w-4xl text-4xl font-black leading-[1.05] tracking-[-0.045em] text-[var(--ink)] sm:text-6xl">{{ quiz().title }}</h1>
+        <a class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="articleUrl()">回文章複習 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="flex items-center gap-4 rounded-full border border-[var(--line)] bg-white/70 px-5 py-3 font-mono text-xs text-[var(--muted)]">
-        <span>{{ answeredCount() }}/5 已回答</span><span class="h-4 w-px bg-[var(--line)]"></span><span>約 {{ quiz.estimatedMinutes }} MIN</span>
+        <span>{{ answeredCount() }}/{{ quiz().questions.length }} 已回答</span><span class="h-4 w-px bg-[var(--line)]"></span><span>約 {{ quiz().estimatedMinutes }} MIN</span>
       </div>
     </div>
   </div>
@@ -31,7 +32,7 @@
     <div class="absolute bottom-12 left-8 top-10 hidden w-px bg-[var(--line)] sm:block" aria-hidden="true"></div>
 
     <div class="space-y-10 sm:space-y-14">
-      @for (question of quiz.questions; track question.id) {
+      @for (question of quiz().questions; track question.id) {
         <article class="relative sm:pl-24" [attr.data-question-id]="question.id">
           <div
             class="relative z-10 mb-3 grid size-10 place-items-center rounded-full border-2 bg-[var(--paper)] font-mono text-xs font-bold sm:absolute sm:left-0 sm:top-0 sm:mb-0 sm:size-16 sm:text-sm"

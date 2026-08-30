@@ -28,24 +28,66 @@
 <section class="bg-[var(--ink)] text-white">
   <div class="mx-auto max-w-[1180px] px-5 py-12 sm:px-8 sm:py-20 lg:px-10">
     <div class="mb-9 flex items-end justify-between gap-5">
-      <div><p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--mint)]">Trailhead / 起點</p><h2 class="mt-3 text-3xl font-black tracking-tight sm:text-4xl">今天從這裡出發</h2></div>
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--mint)]">Trailhead / 目前進度</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight sm:text-4xl">沿著文章，一站一站前進</h2>
+      </div>
       <span class="hidden font-mono text-xs text-white/50 sm:block">01 — 30</span>
     </div>
-    <article class="group relative overflow-hidden rounded-[2rem] bg-[var(--paper)] p-6 text-[var(--ink)] shadow-[0_24px_70px_rgba(0,0,0,0.2)] sm:p-10 lg:grid lg:grid-cols-[180px_1fr_auto] lg:items-center lg:gap-10">
-      <div class="absolute right-0 top-0 h-2 w-1/3 bg-[var(--coral)] transition-[width] duration-500 group-hover:w-1/2"></div>
-      <div class="mb-7 lg:mb-0"><p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--blue)]">Day</p><p class="text-[6rem] font-black leading-none tracking-[-0.09em]">01</p></div>
-      <div>
-        <div class="mb-4 flex flex-wrap items-center gap-2">
-          <span class="rounded-full bg-[var(--mint)] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider">已開放</span>
-          @if (progress?.status === 'submitted') { <span class="rounded-full border border-[var(--line)] px-3 py-1 font-mono text-[11px] font-bold">完成 · {{ progress?.score }}/5</span> }
-          @else if (progress?.status === 'in-progress') { <span class="rounded-full border border-[var(--line)] px-3 py-1 font-mono text-[11px] font-bold">作答中</span> }
+
+    @if (latest; as current) {
+      <article class="group relative overflow-hidden rounded-[2rem] bg-[var(--paper)] p-6 text-[var(--ink)] shadow-[0_24px_70px_rgba(0,0,0,0.2)] sm:p-10 lg:grid lg:grid-cols-[180px_1fr_auto] lg:items-center lg:gap-10">
+        <div class="absolute right-0 top-0 h-2 w-1/3 bg-[var(--coral)] transition-[width] duration-500 group-hover:w-1/2"></div>
+        <div class="mb-7 lg:mb-0"><p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--blue)]">Latest day</p><p class="text-[6rem] font-black leading-none tracking-[-0.09em]">{{ current.entry.day.toString().padStart(2, '0') }}</p></div>
+        <div>
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            <span class="rounded-full bg-[var(--mint)] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider">已開放</span>
+            @if (current.progress?.status === 'submitted') { <span class="rounded-full border border-[var(--line)] px-3 py-1 font-mono text-[11px] font-bold">完成 · {{ current.progress?.score }}/5</span> }
+            @else if (current.progress?.status === 'in-progress') { <span class="rounded-full border border-[var(--line)] px-3 py-1 font-mono text-[11px] font-bold">作答中</span> }
+          </div>
+          <h3 class="max-w-2xl text-2xl font-black leading-tight tracking-tight sm:text-3xl">{{ current.entry.title }}</h3>
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <span class="font-mono text-xs text-[var(--muted)]">5 QUESTIONS · 約 10 MIN</span>
+            <a class="text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="current.entry.articleUrl">先閱讀文章</a>
+          </div>
         </div>
-        <h3 class="max-w-2xl text-2xl font-black leading-tight tracking-tight sm:text-3xl">{{ quiz.title }}</h3>
-        <p class="mt-4 font-mono text-xs text-[var(--muted)]">5 QUESTIONS · 約 {{ quiz.estimatedMinutes }} MIN</p>
+        <a class="mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[var(--blue)] px-7 text-sm font-bold text-white shadow-[0_8px_0_var(--ink)] transition hover:-translate-y-1 hover:shadow-[0_12px_0_var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)] lg:mt-0" [routerLink]="['/day', current.entry.day]">
+          @if (current.progress?.status === 'submitted') { 查看結果 } @else if (current.progress?.status === 'in-progress') { 繼續作答 } @else { 開始測驗 } <span aria-hidden="true">→</span>
+        </a>
+      </article>
+    } @else {
+      <div class="rounded-[2rem] border border-white/15 bg-white/[0.04] px-6 py-10 sm:px-10">
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--mint)]">路線即將開始</p>
+        <p class="mt-3 max-w-2xl text-lg leading-8 text-white/70">第一篇文章發布後，對應的五題測驗才會在這裡開放。</p>
       </div>
-      <a class="mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[var(--blue)] px-7 text-sm font-bold text-white shadow-[0_8px_0_var(--ink)] transition hover:-translate-y-1 hover:shadow-[0_12px_0_var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)] lg:mt-0" routerLink="/day/1">
-        @if (progress?.status === 'submitted') { 查看結果 } @else if (progress?.status === 'in-progress') { 繼續作答 } @else { 開始測驗 } <span aria-hidden="true">→</span>
-      </a>
-    </article>
+    }
+
+    @if (previous.length) {
+      <section class="mt-12" aria-labelledby="completed-trail-title">
+        <h3 id="completed-trail-title" class="font-mono text-xs font-bold uppercase tracking-[0.18em] text-white/50">已開放路線</h3>
+        <div class="relative mt-6 space-y-3 border-l border-white/20 pl-6">
+          @for (item of previous; track item.entry.day) {
+            <article class="relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:flex-row sm:items-center sm:justify-between">
+              <span class="absolute -left-[31px] top-7 size-3 rounded-full bg-[var(--mint)] ring-4 ring-[var(--ink)]" aria-hidden="true"></span>
+              <div><p class="font-mono text-xs text-[var(--mint)]">DAY {{ item.entry.day.toString().padStart(2, '0') }}</p><h4 class="mt-2 font-bold">{{ item.entry.title }}</h4></div>
+              <div class="flex items-center gap-4 text-sm font-bold"><a class="text-white/70 hover:text-white" [href]="item.entry.articleUrl">閱讀文章</a><a class="text-[var(--mint)]" [routerLink]="['/day', item.entry.day]">進入測驗 →</a></div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    @if (upcoming; as next) {
+      <aside class="relative mt-12 border-t border-white/15 pt-10">
+        <div class="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8">
+          <div class="grid size-20 place-items-center rounded-full border-2 border-dashed border-white/35 font-mono text-sm font-bold text-white/60">{{ next.day.toString().padStart(2, '0') }}</div>
+          <div>
+            <p class="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--coral)]">Next checkpoint · 準備中</p>
+            <h3 class="mt-3 max-w-2xl text-xl font-black leading-snug text-white sm:text-2xl">{{ next.title }}</h3>
+            <p class="mt-3 text-sm leading-6 text-white/55">文章發布後才會開放測驗。</p>
+          </div>
+        </div>
+      </aside>
+    }
   </div>
 </section>

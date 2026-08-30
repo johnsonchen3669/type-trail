@@ -37,3 +37,12 @@ https://typetrail.johnsonchen.dev
 ## 題庫
 
 題目以 discriminated union 定義於 `src/app/quiz/`。新增日期時，建立新的型別化資料檔並沿用純函式判分與進度儲存層。
+
+### 開放新的一天
+
+測驗不依日期自動解鎖，而是在文章正式發布後，透過 `src/app/quiz/quiz-catalog.ts` 手動開放。目錄中只保留已發布項目與唯一的下一篇預告，未發布題庫不會進入 production bundle。
+
+1. 將目前的 `coming-soon` 項目改為 `published`。
+2. 填入正式文章網址，並用動態 `import()` 設定該日題庫的 `loadQuiz`。
+3. 新增下一個 Day，狀態設為 `coming-soon`，不要加入題庫 loader。
+4. 執行測試與 production build 後再部署。
