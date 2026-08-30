@@ -23,6 +23,17 @@ fdev run npm test -- --watch=false
 fdev run npm run build
 ```
 
+## 部署
+
+推送到 `main` 後，GitHub Actions 會建立 production 版本並部署至 GitHub Pages：
+
+```text
+https://typetrail.johnson.dev
+```
+
+網站使用 hash routing，讓 GitHub Pages 上的頁面重新整理仍可正常載入，例如
+`https://typetrail.johnson.dev/#/day/1`。自訂網域記錄在 `public/CNAME`。
+
 ## 題庫
 
 題目以 discriminated union 定義於 `src/app/quiz/`。新增日期時，建立新的型別化資料檔並沿用純函式判分與進度儲存層。
