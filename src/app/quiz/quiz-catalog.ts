@@ -4,7 +4,7 @@ export interface PublishedQuizEntry {
   readonly status: 'published';
   readonly day: number;
   readonly title: string;
-  readonly articleUrl: string;
+  readonly articleUrl?: string;
   readonly loadQuiz: () => Promise<QuizDefinition>;
 }
 
@@ -12,20 +12,26 @@ export interface UpcomingQuizEntry {
   readonly status: 'coming-soon';
   readonly day: number;
   readonly title: string;
+  readonly articleUrl?: string;
+  readonly loadQuiz: () => Promise<QuizDefinition>;
 }
 
 export type QuizCatalogEntry = PublishedQuizEntry | UpcomingQuizEntry;
 
-// Publishing workflow:
-// 1. Move the upcoming entry to published and add its article URL + lazy loader.
-// 2. Add exactly one new coming-soon entry for the next article.
-// Keeping unpublished quiz loaders out of this catalog prevents their questions
-// from being included in the production application bundle.
+// Publishing workflow: change only the entry's status from coming-soon to published.
+// articleUrl is optional, so a quiz can open before its article URL is available.
 export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 1,
     title: 'AI 都會寫程式了，為什麼還要學 TypeScript？',
+    loadQuiz: () => import('./day-01.data').then((module) => module.dayOneQuiz),
+  },
+  {
+    status: 'published',
+    day: 2,
+    title: 'JavaScript 是動態型別，問題到底出在哪裡？',
+    loadQuiz: () => import('./day-02.data').then((module) => module.dayTwoQuiz),
   },
 ];
 

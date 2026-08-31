@@ -48,7 +48,9 @@
           <h3 class="max-w-2xl text-2xl font-black leading-tight tracking-tight sm:text-3xl">{{ current.entry.title }}</h3>
           <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
             <span class="font-mono text-xs text-[var(--muted)]">5 QUESTIONS · 約 10 MIN</span>
-            <a class="text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="current.entry.articleUrl">先閱讀文章</a>
+            @if (current.entry.articleUrl; as articleUrl) {
+              <a class="text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="articleUrl">先閱讀文章</a>
+            }
           </div>
         </div>
         <a class="mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[var(--blue)] px-7 text-sm font-bold text-white shadow-[0_8px_0_var(--ink)] transition hover:-translate-y-1 hover:shadow-[0_12px_0_var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)] lg:mt-0" [routerLink]="['/day', current.entry.day]">
@@ -70,7 +72,10 @@
             <article class="relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:flex-row sm:items-center sm:justify-between">
               <span class="absolute -left-[31px] top-7 size-3 rounded-full bg-[var(--mint)] ring-4 ring-[var(--ink)]" aria-hidden="true"></span>
               <div><p class="font-mono text-xs text-[var(--mint)]">DAY {{ item.entry.day.toString().padStart(2, '0') }}</p><h4 class="mt-2 font-bold">{{ item.entry.title }}</h4></div>
-              <div class="flex items-center gap-4 text-sm font-bold"><a class="text-white/70 hover:text-white" [href]="item.entry.articleUrl">閱讀文章</a><a class="text-[var(--mint)]" [routerLink]="['/day', item.entry.day]">進入測驗 →</a></div>
+              <div class="flex items-center gap-4 text-sm font-bold">
+                @if (item.entry.articleUrl; as articleUrl) { <a class="text-white/70 hover:text-white" [href]="articleUrl">閱讀文章</a> }
+                <a class="text-[var(--mint)]" [routerLink]="['/day', item.entry.day]">進入測驗 →</a>
+              </div>
             </article>
           }
         </div>

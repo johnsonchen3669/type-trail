@@ -13,10 +13,11 @@ import { QuizProgressStore } from './quiz-progress.store';
 export class QuizPage implements OnInit {
   private readonly progressStore = inject(QuizProgressStore);
   readonly quiz = input.required<QuizDefinition>();
-  readonly articleUrl = input.required<string>();
+  readonly articleUrl = input<string>();
   protected readonly answers = signal<QuizAnswers>({});
   protected readonly submitted = signal(false);
   protected readonly triedToSubmit = signal(false);
+  protected readonly revealedHints = signal<ReadonlySet<QuestionId>>(new Set());
   protected readonly answeredCount = computed(() =>
     this.quiz().questions.filter((question) => Boolean(this.answers()[question.id]?.trim())).length,
   );
@@ -41,7 +42,17 @@ export class QuizPage implements OnInit {
     return this.result()?.results.find((item) => item.questionId === question.id)?.isCorrect ?? false;
   }
   protected isMissing(questionId: QuestionId): boolean { return this.triedToSubmit() && this.missingIds().includes(questionId); }
+  protected isHintRevealed(questionId: QuestionId): boolean { return this.revealedHints().has(questionId); }
   protected inputValue(event: Event): string { return (event.target as HTMLInputElement).value; }
+
+  protected toggleHint(questionId: QuestionId): void {
+    this.revealedHints.update((revealed) => {
+      const next = new Set(revealed);
+      if (next.has(questionId)) next.delete(questionId);
+      else next.add(questionId);
+      return next;
+    });
+  }
 
   protected setAnswer(questionId: string, value: string): void {
     if (this.submitted()) return;
@@ -69,6 +80,7 @@ export class QuizPage implements OnInit {
     this.answers.set({});
     this.submitted.set(false);
     this.triedToSubmit.set(false);
+    this.revealedHints.set(new Set());
     globalThis.scrollTo?.({ top: 0, behavior: 'smooth' });
   }
 }

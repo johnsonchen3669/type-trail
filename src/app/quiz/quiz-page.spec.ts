@@ -22,11 +22,37 @@ describe('QuizPage', () => {
     const element = fixture.nativeElement as HTMLElement;
 
     expect(element.textContent).not.toContain('正確答案：');
-    element.querySelector<HTMLButtonElement>('button[type="button"]:last-of-type')?.click();
+    element.querySelector<HTMLButtonElement>('[data-submit-quiz]')?.click();
     fixture.detectChanges();
 
     expect(element.querySelectorAll('[data-question-id] .text-red-600')).toHaveLength(5);
     expect(element.textContent).not.toContain('正確答案：');
+  });
+
+  it('reveals and hides a per-question hint without exposing the answer', () => {
+    const fixture = TestBed.createComponent(QuizPage);
+    fixture.componentRef.setInput('quiz', dayOneQuiz);
+    fixture.componentRef.setInput('articleUrl', 'https://example.com/day-1');
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const firstQuestion = element.querySelector<HTMLElement>('[data-question-id="day-01-01"]')!;
+    const hintButton = firstQuestion.querySelector<HTMLButtonElement>('button[aria-controls="hint-day-01-01"]')!;
+
+    expect(firstQuestion.textContent).not.toContain(dayOneQuiz.questions[0]!.hint);
+    expect(firstQuestion.textContent).not.toContain('正確答案：');
+
+    hintButton.click();
+    fixture.detectChanges();
+
+    expect(firstQuestion.textContent).toContain(dayOneQuiz.questions[0]!.hint);
+    expect(hintButton.getAttribute('aria-expanded')).toBe('true');
+    expect(firstQuestion.textContent).not.toContain('正確答案：');
+
+    hintButton.click();
+    fixture.detectChanges();
+
+    expect(firstQuestion.textContent).not.toContain(dayOneQuiz.questions[0]!.hint);
+    expect(hintButton.getAttribute('aria-expanded')).toBe('false');
   });
 
   it('submits a perfect attempt and reveals all explanations', () => {
@@ -49,7 +75,7 @@ describe('QuizPage', () => {
     textInputs[1]!.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
-    element.querySelector<HTMLButtonElement>('button[type="button"]:last-of-type')?.click();
+    element.querySelector<HTMLButtonElement>('[data-submit-quiz]')?.click();
     fixture.detectChanges();
 
     expect(element.querySelectorAll('[data-question-id] .text-green-700')).toHaveLength(5);

@@ -6,6 +6,7 @@ interface BaseQuestion {
   readonly id: QuestionId;
   readonly number: number;
   readonly prompt: string;
+  readonly hint: string;
   readonly learningGoal: string;
   readonly explanation: string;
   readonly code?: string;

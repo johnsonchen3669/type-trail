@@ -6,7 +6,9 @@
       <div>
         <p class="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--coral)]">Checkpoint {{ quiz().day.toString().padStart(2, '0') }} / 30</p>
         <h1 class="mt-4 max-w-4xl text-4xl font-black leading-[1.05] tracking-[-0.045em] text-[var(--ink)] sm:text-6xl">{{ quiz().title }}</h1>
-        <a class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="articleUrl()">回文章複習 <span aria-hidden="true">↗</span></a>
+        @if (articleUrl(); as url) {
+          <a class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--blue)] underline decoration-2 underline-offset-4" [href]="url">回文章複習 <span aria-hidden="true">↗</span></a>
+        }
       </div>
       <div class="flex items-center gap-4 rounded-full border border-[var(--line)] bg-white/70 px-5 py-3 font-mono text-xs text-[var(--muted)]">
         <span>{{ answeredCount() }}/{{ quiz().questions.length }} 已回答</span><span class="h-4 w-px bg-[var(--line)]"></span><span>約 {{ quiz().estimatedMinutes }} MIN</span>
@@ -54,6 +56,24 @@
               <pre class="mt-6 overflow-x-auto rounded-2xl bg-[var(--ink)] p-5 text-sm leading-7 text-[#d8e7f0] shadow-inner"><code>{{ question.code }}</code></pre>
             }
 
+            @if (!submitted()) {
+              <div class="mt-5">
+                <button
+                  class="inline-flex min-h-10 items-center gap-2 rounded-full border border-dashed border-[var(--blue)] bg-[color:var(--blue)/0.035] px-4 font-mono text-xs font-bold text-[var(--blue)] transition hover:bg-[color:var(--blue)/0.08] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--blue)]"
+                  type="button"
+                  [attr.aria-expanded]="isHintRevealed(question.id)"
+                  [attr.aria-controls]="'hint-' + question.id"
+                  (click)="toggleHint(question.id)"
+                ><span class="grid size-5 place-items-center rounded-full bg-[var(--blue)] text-white" aria-hidden="true">?</span> {{ isHintRevealed(question.id) ? '收起提示' : '查看提示' }}</button>
+                @if (isHintRevealed(question.id)) {
+                  <div class="relative border-l-2 border-[var(--coral)] py-2 pl-5" [id]="'hint-' + question.id" aria-live="polite">
+                    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--coral)]">Trail clue / 提示</p>
+                    <p class="mt-2 text-sm leading-7 text-[var(--muted)]">{{ question.hint }}</p>
+                  </div>
+                }
+              </div>
+            }
+
             @if (question.kind === 'choice') {
               <fieldset class="mt-7 space-y-3" [disabled]="submitted()">
                 <legend class="sr-only">第 {{ question.number }} 題選項</legend>
@@ -89,7 +109,7 @@
   @if (!submitted()) {
     <div class="mt-14 rounded-[2rem] bg-[var(--mint)] p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
       <div><p class="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink)]">Ready to check?</p><p class="mt-2 text-sm text-[color:var(--ink)/0.7]">交卷後才會顯示答案與解析。</p></div>
-      <button class="mt-5 min-h-14 w-full rounded-full bg-[var(--ink)] px-8 text-sm font-bold text-white shadow-[0_7px_0_var(--blue)] transition hover:-translate-y-1 hover:shadow-[0_11px_0_var(--blue)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] sm:mt-0 sm:w-auto" type="button" (click)="submit()">檢查我的答案 <span aria-hidden="true">→</span></button>
+      <button class="mt-5 min-h-14 w-full rounded-full bg-[var(--ink)] px-8 text-sm font-bold text-white shadow-[0_7px_0_var(--blue)] transition hover:-translate-y-1 hover:shadow-[0_11px_0_var(--blue)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] sm:mt-0 sm:w-auto" type="button" data-submit-quiz (click)="submit()">檢查我的答案 <span aria-hidden="true">→</span></button>
     </div>
   } @else {
     <div class="mt-14 text-center"><a class="inline-flex min-h-12 items-center gap-2 rounded-full border border-[var(--line)] bg-white px-6 text-sm font-bold text-[var(--ink)] hover:border-[var(--blue)]" routerLink="/">返回路線圖 <span aria-hidden="true">→</span></a></div>

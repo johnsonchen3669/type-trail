@@ -40,9 +40,10 @@ https://typetrail.johnsonchen.dev
 
 ### 開放新的一天
 
-測驗不依日期自動解鎖，而是在文章正式發布後，透過 `src/app/quiz/quiz-catalog.ts` 手動開放。目錄中只保留已發布項目與唯一的下一篇預告，未發布題庫不會進入 production bundle。
+測驗不依日期自動解鎖，而是在文章正式發布後，透過 `src/app/quiz/quiz-catalog.ts` 手動開放。建立題庫時就把標題與 lazy loader 登錄完整，首頁只顯示第一個尚未開放的項目作為下一篇預告。
 
-1. 將目前的 `coming-soon` 項目改為 `published`。
-2. 填入正式文章網址，並用動態 `import()` 設定該日題庫的 `loadQuiz`。
-3. 新增下一個 Day，狀態設為 `coming-soon`，不要加入題庫 loader。
-4. 執行測試與 production build 後再部署。
+1. 將該日唯一需要修改的 `status: 'coming-soon'` 改為 `status: 'published'`。
+2. 有正式文章網址時可預先填入選用的 `articleUrl`；沒有網址不影響測驗開放。
+3. 執行測試與 production build 後再部署。
+
+網站部署在 GitHub Pages，預先登錄的題庫會成為 production build 的 lazy chunk。應用程式會鎖住尚未發布的路由，但靜態檔案不具備後端存取控制；不要在未發布題庫中存放機密資料。
