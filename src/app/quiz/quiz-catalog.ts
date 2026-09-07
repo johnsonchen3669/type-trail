@@ -33,6 +33,36 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     title: 'JavaScript 是動態型別，問題到底出在哪裡？',
     loadQuiz: () => import('./day-02.data').then((module) => module.dayTwoQuiz),
   },
+  {
+    status: 'published',
+    day: 3,
+    title: 'Scope 與 Closure：函式如何記住外部狀態？',
+    loadQuiz: () => import('./day-03.data').then((module) => module.dayThreeQuiz),
+  },
+  {
+    status: 'published',
+    day: 4,
+    title: 'Prototype、Class 與 this',
+    loadQuiz: () => import('./day-04.data').then((module) => module.dayFourQuiz),
+  },
+  {
+    status: 'published',
+    day: 5,
+    title: 'Promise、async/await 與 Event Loop',
+    loadQuiz: () => import('./day-05.data').then((module) => module.dayFiveQuiz),
+  },
+  {
+    status: 'published',
+    day: 6,
+    title: 'ES Module：現代 JavaScript 專案的邊界',
+    loadQuiz: () => import('./day-06.data').then((module) => module.daySixQuiz),
+  },
+  {
+    status: 'published',
+    day: 7,
+    title: '從 JavaScript 到 TypeScript：編譯時與執行時',
+    loadQuiz: () => import('./day-07.data').then((module) => module.daySevenQuiz),
+  },
 ];
 
 export const publishedQuizzes = quizCatalog.filter(

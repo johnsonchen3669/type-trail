@@ -19,7 +19,9 @@ describe('quiz catalog', () => {
   });
 
   it('prepares quiz loaders before publication', async () => {
-    await expect(findQuizEntry(1)!.loadQuiz()).resolves.toMatchObject({ id: 'day-01', day: 1 });
-    await expect(findQuizEntry(2)!.loadQuiz()).resolves.toMatchObject({ id: 'day-02', day: 2 });
+    const quizzes = await Promise.all(quizCatalog.map((entry) => entry.loadQuiz()));
+
+    expect(quizzes.map((quiz) => quiz.day)).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    expect(quizzes.every((quiz) => quiz.questions.length === 5)).toBe(true);
   });
 });

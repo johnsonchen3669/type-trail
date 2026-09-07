@@ -1,6 +1,6 @@
 # 型旅 TypeTrail
 
-30 天 JavaScript、TypeScript 與 AI 開發文章系列的伴讀測驗網站。首版收錄 Day 1 五題，交卷後顯示分數、答案與解析，作答進度保存在瀏覽器。
+30 天 JavaScript、TypeScript 與 AI 開發文章系列的伴讀測驗網站。目前收錄 Day 1–7，每天五題；交卷後顯示分數、答案與解析，作答進度保存在瀏覽器。
 
 ## 開發環境
 
