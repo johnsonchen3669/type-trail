@@ -63,7 +63,7 @@ describe('QuizPage', () => {
     const element = fixture.nativeElement as HTMLElement;
 
     const questionCards = element.querySelectorAll<HTMLElement>('[data-question-id]');
-    for (const [index, answer] of ['C', 'B', 'C'].entries()) {
+    for (const [index, answer] of ['C', 'B', 'B'].entries()) {
       questionCards[index]?.querySelector<HTMLInputElement>(`input[type="radio"][value="${answer}"]`)?.click();
       fixture.detectChanges();
     }

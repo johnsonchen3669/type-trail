@@ -5,7 +5,7 @@ import { gradeQuiz, isQuestionCorrect } from './quiz-engine';
 describe('quiz engine', () => {
   it('grades all Day 1 answers correctly', () => {
     const result = gradeQuiz(dayOneQuiz, {
-      'day-01-01': 'C', 'day-01-02': 'B', 'day-01-03': 'C', 'day-01-04': 'fill', 'day-01-05': 'Question',
+      'day-01-01': 'C', 'day-01-02': 'B', 'day-01-03': 'B', 'day-01-04': 'fill', 'day-01-05': 'Question',
     });
     expect(result.score).toBe(5);
     expect(result.total).toBe(5);
