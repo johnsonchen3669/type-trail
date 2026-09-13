@@ -25,6 +25,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 1,
     title: 'AI 都會寫程式了，為什麼還要學 TypeScript？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/introduction/',
     loadQuiz: () => import('./day-01.data').then((module) => module.dayOneQuiz),
   },
   {
