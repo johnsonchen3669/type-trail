@@ -7,16 +7,16 @@ export const dayOneQuiz: QuizDefinition = {
   estimatedMinutes: 10,
   questions: [
     {
-      id: 'day-01-01', number: 1, kind: 'choice', learningGoal: '理解 TypeScript 在 AI 生成程式碼中的角色',
+      id: 'day-01-01', number: 1, kind: 'choice', learningGoal: '理解共同資料契約在多人與 AI 協作中的用途',
       prompt: 'AI 已經能產生 TypeScript 程式碼後，開發者仍需要學習 TypeScript 的主要理由是什麼？',
       hint: '先分開想「按照規則產生程式」與「定義並驗收規則」是誰的責任。',
       options: [
-        { id: 'A', label: 'TypeScript 可以保證程式在 Runtime 絕對不會出錯' },
+        { id: 'A', label: 'TypeScript 可以保證程式在執行期間絕對不會出錯' },
         { id: 'B', label: 'TypeScript 可以確認 AI 使用的每一個 API 都真實存在' },
-        { id: 'C', label: '開發者可以先定義資料契約，讓 TypeScript 檢查 AI 是否遵守其中一部分規則' },
+        { id: 'C', label: '開發者可以定義共同資料契約，讓 TypeScript 檢查多人與 AI 寫的程式是否遵守其中一部分規則' },
         { id: 'D', label: 'TypeScript 可以取代錯誤處理、測試與人工審查' },
       ],
-      correctAnswer: 'C', explanation: 'TypeScript 能在編譯階段檢查已經被型別描述的規則，但不能取代 Runtime 驗證、測試或工程判斷。',
+      correctAnswer: 'C', explanation: '多人各自與 AI 協作時，共用資料契約能讓出題、畫面與判分功能有一致的依據。TypeScript 能在編譯階段檢查已經被型別描述的規則，例如題型名稱是否一致；開發者仍需理解並維護這些規則，並透過執行期間的資料驗證、測試與人工審查確認結果。',
     },
     {
       id: 'day-01-02', number: 2, kind: 'choice', learningGoal: '區分合法 JavaScript 字串與合法 TypeScript 型別值',
@@ -39,7 +39,7 @@ export const dayOneQuiz: QuizDefinition = {
       options: [
         { id: 'A', label: 'boolean 不能作為函式參數型別' },
         { id: 'B', label: '函式回傳的分數邏輯寫反了；型別正確仍可能不符合產品需求' },
-        { id: 'C', label: 'TypeScript 會在 Runtime 自動把 true 改成 10' },
+        { id: 'C', label: 'TypeScript 會在程式執行期間自動把 true 改成 10' },
         { id: 'D', label: '回傳型別必須改成 Question' },
       ],
       correctAnswer: 'B', explanation: '這段程式的參數與回傳值都符合型別，但答對時回傳 0、答錯時回傳 10，與題目規定相反。TypeScript 能檢查已描述的型別關係，不會自行理解產品的判分規則。',
