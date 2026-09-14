@@ -32,6 +32,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'coming-soon',
     day: 2,
     title: 'JavaScript 是動態型別，問題到底出在哪裡？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/javascript-dynamic-typing/',
     loadQuiz: () => import('./day-02.data').then((module) => module.dayTwoQuiz),
   },
   {
@@ -105,6 +106,12 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     day: 14,
     title: '型別斷言：as 為什麼可能只是在欺騙自己？',
     loadQuiz: () => import('./day-14.data').then((module) => module.dayFourteenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 15,
+    title: 'Interface vs Type：從使用目的判斷',
+    loadQuiz: () => import('./day-15.data').then((module) => module.dayFifteenQuiz),
   },
 ];
 
