@@ -21,7 +21,7 @@ describe('quiz catalog', () => {
   it('prepares quiz loaders before publication', async () => {
     const quizzes = await Promise.all(quizCatalog.map((entry) => entry.loadQuiz()));
 
-    expect(quizzes.map((quiz) => quiz.day)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
+    expect(quizzes.map((quiz) => quiz.day)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
     expect(quizzes.every((quiz) => quiz.questions.length === 5)).toBe(true);
   });
 });
