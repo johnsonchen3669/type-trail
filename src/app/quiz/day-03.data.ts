@@ -16,8 +16,8 @@ export const dayThreeQuiz: QuizDefinition = {
       options: [
         { id: 'A', label: '函式每次被呼叫的位置' },
         { id: 'B', label: '函式定義時在程式中的巢狀位置' },
-        { id: 'C', label: '函式名稱的長度' },
-        { id: 'D', label: '呼叫函式時傳入的參數數量' },
+        { id: 'C', label: '函式執行前，最近一次宣告同名變數的位置' },
+        { id: 'D', label: '程式中所有同名變數所在的位置' },
       ],
       correctAnswer: 'B',
       explanation:
@@ -47,7 +47,7 @@ export const dayThreeQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '辨識傳入函式的回呼是否真的被呼叫',
       prompt: '以下程式執行後，為什麼 printResult 不會印出作答結果？',
-      hint: '檢查 checkAnswer 裡的 onResult 後面是否有呼叫函式所需的括號。',
+      hint: '從 checkAnswer 接收函式後的執行流程，追蹤結果如何交給它處理。',
       code: 'function checkAnswer(answer, onResult) {\n  const isCorrect = answer === "A";\n  onResult;\n}\n\ncheckAnswer("A", function printResult(isCorrect) {\n  console.log(isCorrect ? "答對了" : "再試一次");\n});',
       options: [
         { id: 'A', label: 'onResult 只是被讀取，沒有使用 onResult(isCorrect) 呼叫' },
@@ -66,7 +66,7 @@ export const dayThreeQuiz: QuizDefinition = {
       learningGoal: '辨識限制 let 與 const 可見範圍的作用域名稱',
       prompt:
         'let 與 const 宣告在 if 的大括號內時，這種限制名稱可見範圍的作用域稱為什麼？請輸入文章使用的英文術語。',
-      hint: '答案由 block 加上一個表示「作用域」的英文單字組成。',
+      hint: '想想這裡限制名稱範圍的邊界，是整個函式，還是 if 的大括號。',
       acceptedAnswers: ['block scope'],
       explanation:
         'let 與 const 具有區塊作用域，因此在 if 區塊內宣告的名稱，離開大括號後不能直接存取。',
@@ -76,12 +76,12 @@ export const dayThreeQuiz: QuizDefinition = {
       number: 5,
       kind: 'code-fill',
       learningGoal: '使用閉包更新並保留外層狀態',
-      prompt: '填入一行程式，讓每次呼叫 addScore 都先把 points 加到外層的 score，再回傳累積結果。',
-      hint: '使用加法指定運算子更新 score，右側是函式收到的參數。',
-      code: 'function createScoreTracker() {\n  let score = 0;\n\n  return function addScore(points) {\n    ______\n    return score;\n  };\n}',
-      acceptedAnswers: ['score += points;', 'score += points'],
+      prompt: '使用 += 補上一行程式，讓每次呼叫 recordAnswer 都把外層的 attempts 加一，再回傳作答紀錄。',
+      hint: '找出閉包需要持續更新的變數，並觀察這次程式要增加的固定數值。',
+      code: 'function createAnswerRecorder(questionId) {\n  let attempts = 0;\n\n  return function recordAnswer(answer) {\n    ______\n    return { questionId, answer, attempts };\n  };\n}',
+      acceptedAnswers: ['attempts += 1;', 'attempts += 1'],
       explanation:
-        '內層函式透過閉包存取外層的 score。score += points 會更新同一個變數，因此累積結果能延續到下一次呼叫。',
+        '內層函式透過閉包存取外層的 attempts。attempts += 1 會更新同一個變數，因此下一次呼叫時能取得累加後的次數。',
     },
   ],
 };
