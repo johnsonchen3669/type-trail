@@ -29,7 +29,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-01.data').then((module) => module.dayOneQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 2,
     title: 'JavaScript 是動態型別，問題到底出在哪裡？',
     articleUrl: 'https://johnsonchen.dev/blog/typescript/javascript-dynamic-typing/',
