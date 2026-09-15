@@ -39,6 +39,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'coming-soon',
     day: 3,
     title: 'Scope 與 Closure：函式如何記住外部狀態？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/scope-and-closure/',
     loadQuiz: () => import('./day-03.data').then((module) => module.dayThreeQuiz),
   },
   {
