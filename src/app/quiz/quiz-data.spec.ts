@@ -45,7 +45,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-03-02': 'A',
       'day-03-03': 'A',
       'day-03-04': 'block scope',
-      'day-03-05': 'score += points;',
+      'day-03-05': 'attempts += 1;',
     },
   ],
   [
