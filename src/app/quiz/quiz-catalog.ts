@@ -36,7 +36,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-02.data').then((module) => module.dayTwoQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 3,
     title: 'Scope 與 Closure：函式如何記住外部狀態？',
     articleUrl: 'https://johnsonchen.dev/blog/typescript/scope-and-closure/',
