@@ -11,20 +11,27 @@ export const dayFourQuiz: QuizDefinition = {
       number: 1,
       kind: 'choice',
       learningGoal: '區分 prototype chain 與一般函式的 this 所處理的問題',
-      prompt: '執行 session.showScore() 時，下列哪一項描述最準確？',
-      hint: '把「找到 showScore」與「決定以誰呼叫它」拆成兩個問題。',
+      prompt: '執行 firstQuestion.showPrompt() 時，下列哪一項描述最準確？',
+      hint: '把「找到 showPrompt」與「決定以誰呼叫它」拆成兩個問題。',
       options: [
         {
           id: 'A',
-          label: 'Prototype chain 決定 showScore 在哪裡找到；呼叫時點號左邊的 session 成為 this',
+          label:
+            'Prototype chain 決定 showPrompt 在哪裡找到；呼叫時點號左邊的 firstQuestion 成為 this',
         },
-        { id: 'B', label: 'Prototype chain 永久把 showScore 的 this 綁定為 session' },
-        { id: 'C', label: 'Scope chain 會從 session 往上尋找 showScore 屬性' },
+        {
+          id: 'B',
+          label: 'Prototype chain 永久把 showPrompt 的 this 綁定為 firstQuestion',
+        },
+        {
+          id: 'C',
+          label: 'showPrompt 一定直接儲存在 firstQuestion 上，不需要沿 prototype chain 尋找',
+        },
         { id: 'D', label: 'Class instance 的 method 不需要 this 也能讀取 instance 欄位' },
       ],
       correctAnswer: 'A',
       explanation:
-        '若 instance 本身沒有 showScore，屬性查找會沿 prototype chain 進行；找到函式後，session.showScore() 這種 method 呼叫以 session 作為 receiver，因此 this 是 session。兩套機制回答的是不同問題。',
+        'firstQuestion 本身沒有 showPrompt，所以屬性查找會沿 prototype chain 到 Question.prototype。找到函式後，firstQuestion.showPrompt() 以 firstQuestion 作為 receiver，因此 this 是 firstQuestion。',
     },
     {
       id: 'day-04-02',
@@ -72,11 +79,11 @@ export const dayFourQuiz: QuizDefinition = {
       kind: 'exact-text',
       learningGoal: '辨識用來建立固定 this 之新函式的方法',
       prompt:
-        '文章使用哪一個函式方法，建立固定以 session 作為 this 的新 callback？只輸入方法名稱。',
+        '文章使用哪一個函式方法，建立固定以 firstQuestion 作為 this 的新 callback？只輸入方法名稱。',
       hint: '這個方法不會立即執行原函式，而會回傳一個新函式。',
       acceptedAnswers: ['bind'],
       explanation:
-        'session.showScore.bind(session) 會回傳新函式；新函式被呼叫時，使用指定的 session 作為 this。',
+        'firstQuestion.showPrompt.bind(firstQuestion) 會回傳新函式；新函式被呼叫時，使用指定的 firstQuestion 作為 this。',
     },
     {
       id: 'day-04-05',
