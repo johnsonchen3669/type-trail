@@ -40,10 +40,11 @@ https://typetrail.johnsonchen.dev
 
 ### 開放新的一天
 
-測驗不依日期自動解鎖，而是在文章正式發布後，透過 `src/app/quiz/quiz-catalog.ts` 手動開放。建立題庫時就把標題與 lazy loader 登錄完整，首頁只顯示第一個尚未開放的項目作為下一篇預告。
+測驗以 2026-09-14 的 Day 1 為起點，每個台北日期依序開放下一天。`.github/workflows/publish-scheduled-quizzes.yml` 每天執行，透過 `scripts/publish-scheduled-quizzes.mjs` 將已登錄且到期的項目從 `coming-soon` 改為 `published`，提交變更後再觸發 GitHub Pages 部署。若排程延遲或漏跑，下一次執行會一併補開所有已到期項目。
 
-1. 將該日唯一需要修改的 `status: 'coming-soon'` 改為 `status: 'published'`。
-2. 有正式文章網址時可預先填入選用的 `articleUrl`；沒有網址不影響測驗開放。
-3. 執行測試與 production build 後再部署。
+1. 新增題庫時，先在 `src/app/quiz/quiz-catalog.ts` 以 `coming-soon` 登錄標題與 lazy loader。
+2. Day N 的開放日期為 2026-09-14 加上 N − 1 天；例如 Day 4 會在 2026-09-17 開放。
+3. 有正式文章網址時可預先填入選用的 `articleUrl`；沒有網址不影響測驗開放。
+4. 需要補跑時，可從 Actions 手動執行 workflow，並選填要發布到的台北日期。
 
 網站部署在 GitHub Pages，預先登錄的題庫會成為 production build 的 lazy chunk。應用程式會鎖住尚未發布的路由，但靜態檔案不具備後端存取控制；不要在未發布題庫中存放機密資料。

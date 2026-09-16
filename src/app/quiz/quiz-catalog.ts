@@ -46,6 +46,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'coming-soon',
     day: 4,
     title: 'Prototype、Class 與 this',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/prototype-class-and-this/',
     loadQuiz: () => import('./day-04.data').then((module) => module.dayFourQuiz),
   },
   {

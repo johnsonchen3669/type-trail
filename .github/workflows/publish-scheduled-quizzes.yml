@@ -1,0 +1,68 @@
+name: Publish Scheduled Quizzes
+
+on:
+  schedule:
+    # 04:07 UTC = 12:07 Asia/Taipei. Avoid the top of the hour, when GitHub
+    # Actions scheduled runs are more likely to be delayed.
+    - cron: '7 4 * * *'
+  workflow_dispatch:
+    inputs:
+      publish_date:
+        description: 'Asia/Taipei date to publish through (YYYY-MM-DD); defaults to today'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: publish-scheduled-quizzes
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Publish quizzes scheduled through today
+        id: publish
+        env:
+          REQUESTED_DATE: ${{ inputs.publish_date }}
+          TZ: Asia/Taipei
+        run: |
+          publish_date="${REQUESTED_DATE:-$(date +%F)}"
+          node scripts/publish-scheduled-quizzes.mjs --date "$publish_date"
+          echo "publish_date=$publish_date" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push publish changes
+        id: commit
+        env:
+          PUBLISH_DATE: ${{ steps.publish.outputs.publish_date }}
+        run: |
+          if git diff --quiet src/app/quiz/quiz-catalog.ts; then
+            echo "No quizzes are due for publication through $PUBLISH_DATE."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add src/app/quiz/quiz-catalog.ts
+            git commit -m "feat: publish quizzes scheduled through $PUBLISH_DATE"
+            git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # A push made with GITHUB_TOKEN does not trigger other workflows, so
+      # dispatch the Pages deployment explicitly after a publication commit.
+      - name: Trigger Pages deployment
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main
