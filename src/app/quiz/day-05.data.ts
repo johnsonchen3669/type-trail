@@ -29,7 +29,7 @@ export const dayFiveQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '依據同步程式、microtask 與 task 的順序判斷 Runtime 輸出',
       prompt: '以下 JavaScript 程式依序輸出什麼？',
-      hint: '先完成目前的同步程式，再比較 Promise reaction 所在的 microtask queue 與計時器所在的 task queue。',
+      hint: '先完成目前的同步程式，再比較 Promise 處理函式與計時器回呼函式的執行順序。',
       code: 'console.log("A");\n\nsetTimeout(() => console.log("B"), 0);\n\nPromise.resolve().then(() => console.log("C"));\n\nconsole.log("D");',
       options: [
         { id: 'A', label: 'A、B、C、D' },
@@ -39,7 +39,7 @@ export const dayFiveQuiz: QuizDefinition = {
       ],
       correctAnswer: 'C',
       explanation:
-        'A、D 是目前的同步程式；call stack 清空後先處理 Promise microtask，因此輸出 C；計時器 callback 是後續 task，最後輸出 B。',
+        'A、D 是目前的同步程式；同步程式結束後先處理 Promise microtask，因此輸出 C；計時器回呼函式是後續 task，最後輸出 B。',
     },
     {
       id: 'day-05-03',
