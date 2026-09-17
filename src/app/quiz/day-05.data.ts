@@ -21,7 +21,7 @@ export const dayFiveQuiz: QuizDefinition = {
       ],
       correctAnswer: 'B',
       explanation:
-        'await 等待 Promise settled 時，只暫停目前 async function 的後續流程，並把控制權交還 Runtime。它沒有阻塞整個 JavaScript，也沒有移除 Promise。',
+        'await 等待 Promise 完成時，只暫停目前 async function 的後續流程，並把控制權交還 Runtime。它沒有阻塞整個 JavaScript，也沒有移除 Promise。',
     },
     {
       id: 'day-05-02',
@@ -72,8 +72,7 @@ export const dayFiveQuiz: QuizDefinition = {
         'Promise 尚未 fulfilled 或 rejected 時，處於哪一個狀態？請輸入文章使用的英文狀態名稱。',
       hint: '三種狀態中，另外兩個分別表示成功與失敗；本題要找「仍在等待」的狀態。',
       acceptedAnswers: ['pending'],
-      explanation:
-        'Promise 建立後、尚未 settled 時處於 pending；之後可能變成 fulfilled 或 rejected。',
+      explanation: 'Promise 建立後、尚未完成時處於 pending；之後可能變成 fulfilled 或 rejected。',
     },
     {
       id: 'day-05-05',
@@ -85,7 +84,7 @@ export const dayFiveQuiz: QuizDefinition = {
       code: 'const questionsPromise = loadQuestions();\nconst progressPromise = loadProgress();\n\nconst [questions, progress] = await Promise.____([\n  questionsPromise,\n  progressPromise,\n]);',
       acceptedAnswers: ['all'],
       explanation:
-        'Promise.all([...]) 會等待輸入的 Promise 全部 fulfilled，並依輸入順序產生結果陣列。兩個載入函式已先被呼叫，因此等待時間可以重疊。',
+        'Promise.all([...]) 會等待輸入的 Promise 全部 fulfilled。兩個載入函式已先被呼叫，因此等待時間可以重疊。',
     },
   ],
 };
