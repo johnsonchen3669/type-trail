@@ -2,9 +2,8 @@ name: Publish Scheduled Quizzes
 
 on:
   schedule:
-    # 04:07 UTC = 12:07 Asia/Taipei. Avoid the top of the hour, when GitHub
-    # Actions scheduled runs are more likely to be delayed.
-    - cron: '7 4 * * *'
+    # 12:00 UTC = 20:00 Asia/Taipei.
+    - cron: '0 12 * * *'
   workflow_dispatch:
     inputs:
       publish_date:

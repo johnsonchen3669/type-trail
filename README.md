@@ -40,7 +40,7 @@ https://typetrail.johnsonchen.dev
 
 ### 開放新的一天
 
-測驗以 2026-09-14 的 Day 1 為起點，每個台北日期依序開放下一天。`.github/workflows/publish-scheduled-quizzes.yml` 每天執行，透過 `scripts/publish-scheduled-quizzes.mjs` 將已登錄且到期的項目從 `coming-soon` 改為 `published`，提交變更後再觸發 GitHub Pages 部署。若排程延遲或漏跑，下一次執行會一併補開所有已到期項目。
+測驗以 2026-09-14 的 Day 1 為起點，每個台北日期晚上 20:00 依序開放下一天。`.github/workflows/publish-scheduled-quizzes.yml` 每天執行，透過 `scripts/publish-scheduled-quizzes.mjs` 將已登錄且到期的項目從 `coming-soon` 改為 `published`，提交變更後再觸發 GitHub Pages 部署。若排程延遲或漏跑，下一次執行會一併補開所有已到期項目。
 
 1. 新增題庫時，先在 `src/app/quiz/quiz-catalog.ts` 以 `coming-soon` 登錄標題與 lazy loader。
 2. Day N 的開放日期為 2026-09-14 加上 N − 1 天；例如 Day 4 會在 2026-09-17 開放。
