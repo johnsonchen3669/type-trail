@@ -53,6 +53,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'coming-soon',
     day: 5,
     title: 'Promise、async/await 與 Event Loop',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/promise-async-await-event-loop/',
     loadQuiz: () => import('./day-05.data').then((module) => module.dayFiveQuiz),
   },
   {
