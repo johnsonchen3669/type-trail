@@ -27,17 +27,17 @@ export const dayFourQuiz: QuizDefinition = {
           id: 'C',
           label: 'showPrompt 一定直接儲存在 firstQuestion 上，不需要沿 prototype chain 尋找',
         },
-        { id: 'D', label: 'Class instance 的 method 不需要 this 也能讀取 instance 欄位' },
+        { id: 'D', label: 'Class instance 的方法不需要 this 也能讀取 instance 欄位' },
       ],
       correctAnswer: 'A',
       explanation:
-        'firstQuestion 本身沒有 showPrompt，所以屬性查找會沿 prototype chain 到 Question.prototype。找到函式後，firstQuestion.showPrompt() 以 firstQuestion 作為 receiver，因此 this 是 firstQuestion。',
+        'firstQuestion 本身沒有 showPrompt，所以屬性查找會沿 prototype chain 到 Question.prototype。找到函式後，呼叫時點號左邊的物件是 firstQuestion，因此 this 是 firstQuestion。',
     },
     {
       id: 'day-04-02',
       number: 2,
       kind: 'choice',
-      learningGoal: '根據呼叫方式判斷一般 method 中的 this',
+      learningGoal: '根據呼叫方式判斷一般方法中的 this',
       prompt: '以下 JavaScript 程式會輸出什麼？',
       hint: 'showTitle 函式雖然來自 quiz，實際呼叫時點號左邊是哪一個物件？',
       code: 'const quiz = {\n  title: "Day 4",\n  showTitle() {\n    console.log(this.title);\n  },\n};\n\nconst review = {\n  title: "複習題",\n  showTitle: quiz.showTitle,\n};\n\nreview.showTitle();',
@@ -49,29 +49,29 @@ export const dayFourQuiz: QuizDefinition = {
       ],
       correctAnswer: 'B',
       explanation:
-        '一般函式的 this 由呼叫方式決定。這次是 review.showTitle()，receiver 為 review，所以讀到 review.title 並輸出複習題。',
+        '一般函式的 this 由呼叫方式決定。這次呼叫時點號左邊是 review，所以讀到 review.title 並輸出複習題。',
     },
     {
       id: 'day-04-03',
       number: 3,
       kind: 'choice',
-      learningGoal: '辨識 class method 作為 callback 時遺失 receiver 的原因',
+      learningGoal: '辨識 class 方法作為回呼函式時遺失 this 的原因',
       prompt: '以下程式最後一行為什麼會發生 TypeError？',
-      hint: '取得 method 與呼叫 method 是兩個動作；檢查最後一行是否仍保留 session.。',
+      hint: '取得方法與呼叫方法是兩個動作；檢查最後一行是否仍保留 session.。',
       code: 'class QuizSession {\n  constructor(score) {\n    this.score = score;\n  }\n\n  showScore() {\n    console.log(this.score);\n  }\n}\n\nconst session = new QuizSession(3);\nconst callback = session.showScore;\n\ncallback();',
       options: [
-        { id: 'A', label: 'Class method 不能指定給變數' },
+        { id: 'A', label: 'Class 方法不能指定給變數' },
         { id: 'B', label: 'score 必須宣告在 prototype 上' },
         {
           id: 'C',
           label:
-            'callback() 沒有 receiver；class method 在 strict mode 下執行時，this 是 undefined',
+            'callback() 不是透過物件呼叫；class 方法在 strict mode 下執行時，this 是 undefined',
         },
         { id: 'D', label: 'Constructor 不能接收數字' },
       ],
       correctAnswer: 'C',
       explanation:
-        'session.showScore 取得函式後，函式值被單獨保存。最後以 callback() 呼叫時已沒有 session 這個 receiver，所以 this 是 undefined，讀取 this.score 便發生 TypeError。',
+        'session.showScore 取得函式後，函式值被單獨保存。最後直接以 callback() 呼叫，不是透過 session 物件呼叫，所以 this 是 undefined，讀取 this.score 便發生 TypeError。',
     },
     {
       id: 'day-04-04',
