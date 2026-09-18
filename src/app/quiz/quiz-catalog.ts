@@ -50,9 +50,9 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-04.data').then((module) => module.dayFourQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 5,
-    title: 'Promise、async/await 與 Event Loop',
+    title: 'Promise、async/await 與事件迴圈',
     articleUrl: 'https://johnsonchen.dev/blog/typescript/promise-async-await-event-loop/',
     loadQuiz: () => import('./day-05.data').then((module) => module.dayFiveQuiz),
   },
