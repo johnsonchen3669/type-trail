@@ -76,14 +76,13 @@ export const daySixQuiz: QuizDefinition = {
       id: 'day-06-05',
       number: 5,
       kind: 'code-fill',
-      learningGoal: '明確表達只參與 TypeScript 型別檢查的匯入',
-      prompt:
-        'Question 只用來描述參數，不需要執行時匯入。請補上一個關鍵字，明確讓整行成為會被移除的型別匯入。路徑沿用文章先編譯為 JavaScript ESM 的情境。',
-      hint: '空格決定這行匯入是否只供型別檢查使用。',
-      code: 'import ____ { Question } from "./question-types.js";\n\nexport function showQuestion(question: Question) {\n  console.log(question.prompt);\n}',
-      acceptedAnswers: ['type'],
+      learningGoal: '辨識 CommonJS 模組的載入方式',
+      prompt: '以下 main.cjs 沿用文章的 CommonJS 範例，請補上載入模組的函式名稱。',
+      hint: 'CommonJS 不使用 import 關鍵字，而是以函式呼叫取得匯出內容，再解構出 gradeAnswer。',
+      code: 'const { gradeAnswer } = ____("./grade.cjs");',
+      acceptedAnswers: ['require'],
       explanation:
-        'import type 明確標示只匯入型別，整行不會留在 JavaScript 輸出中，也不會用來執行來源模組的初始化程式。',
+        'CommonJS 以 require() 載入模組，回傳的物件對應來源的 module.exports；這裡的 { gradeAnswer } 是從回傳物件取出屬性，和 ESM 的具名匯入是不同機制。',
     },
   ],
 };

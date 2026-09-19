@@ -63,12 +63,13 @@ export const dayNineQuiz: QuizDefinition = {
       id: 'day-09-04',
       number: 4,
       kind: 'exact-text',
-      learningGoal: '辨識 optional property 的語法',
-      prompt: '在 explanation?: string 中，表示 property 可以省略的符號是哪一個？只輸入一個符號。',
-      hint: '它放在 property 名稱和冒號之間，不是型別名稱的一部分。',
-      acceptedAnswers: ['?'],
+      learningGoal: '明確表達只參與編譯期檢查的型別匯入',
+      prompt:
+        'main.ts 要從 ./question-types.js 匯入 Question 型別，並讓整行匯入不出現在編譯後的 JavaScript。import 後面要加哪個關鍵字？只輸入關鍵字。',
+      hint: '文章用這個關鍵字宣告匯入的名稱只參與編譯期檢查。',
+      acceptedAnswers: ['type'],
       explanation:
-        'property 名稱後的 ? 表示 optional property，例如 explanation?: string 允許建立物件時省略 explanation。',
+        'import type { Question } from "./question-types.js" 明確宣告只匯入型別；編譯後整行消失，也不會載入並執行來源模組。',
     },
     {
       id: 'day-09-05',

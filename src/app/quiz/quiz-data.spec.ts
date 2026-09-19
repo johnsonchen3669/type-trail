@@ -75,7 +75,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-06-02': 'B',
       'day-06-03': 'D',
       'day-06-04': 'module',
-      'day-06-05': 'type',
+      'day-06-05': 'require',
     },
   ],
   [
@@ -104,7 +104,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-09-01': 'B',
       'day-09-02': 'C',
       'day-09-03': 'A',
-      'day-09-04': '?',
+      'day-09-04': 'type',
       'day-09-05': 'string[]',
     },
   ],
