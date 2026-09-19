@@ -3,33 +3,33 @@ import { QuizDefinition } from './quiz.models';
 export const daySixQuiz: QuizDefinition = {
   id: 'day-06',
   day: 6,
-  title: 'ES Module：現代 JavaScript 專案的邊界',
+  title: 'ES 模組（ES Module）：現代 JavaScript 專案的邊界',
   estimatedMinutes: 12,
   questions: [
     {
       id: 'day-06-01',
       number: 1,
       kind: 'choice',
-      learningGoal: '理解 module scope 與匯出邊界',
+      learningGoal: '理解模組作用域與匯出邊界',
       prompt:
-        'grade.js 在頂層宣告 const points = 10，但沒有匯出它。另一個 ES Module 要如何理解這個變數？',
+        'grade.js 在頂層宣告 const points = 10，但沒有匯出它。另一個 ES 模組要如何理解這個變數？',
       hint: '想想「檔案內有宣告」與「對外提供名稱」之間還差哪一步。',
       options: [
         { id: 'A', label: '只要在同一個資料夾，就能直接使用 points' },
         { id: 'B', label: '匯入 grade.js 的任何函式後，就能直接使用 points' },
-        { id: 'C', label: 'points 留在來源模組的 scope，其他模組不能直接以具名匯入取得它' },
+        { id: 'C', label: 'points 留在來源模組的作用域，其他模組不能直接以具名匯入取得它' },
         { id: 'D', label: '沒有匯出的變數，連 grade.js 裡的函式都不能使用' },
       ],
       correctAnswer: 'C',
       explanation:
-        '模組內宣告不會自動成為全域名稱，也不會自動匯出。來源模組內的函式仍能依 scope 規則使用它。',
+        '模組內宣告不會自動成為全域名稱，也不會自動匯出。來源模組內的函式仍能依作用域規則使用它。',
     },
     {
       id: 'day-06-02',
       number: 2,
       kind: 'choice',
       learningGoal: '理解匯入會反映來源綁定的更新',
-      prompt: '以下兩個檔案在文章設定的 Node.js ESM 環境中，執行 main.js 會依序輸出什麼？',
+      prompt: '以下兩個檔案在文章設定的 Node.js ES 模組環境中，執行 main.js 會依序輸出什麼？',
       hint: '檢查函式更新的是哪一個變數，再判斷匯入是否只保留初始數字。',
       code: '// counter.js\nexport let count = 2;\n\nexport function increment() {\n  count += 1;\n}\n\n// main.js\nimport { count, increment } from "./counter.js";\n\nconsole.log(count);\nincrement();\nconsole.log(count);',
       options: [
@@ -40,14 +40,14 @@ export const daySixQuiz: QuizDefinition = {
       ],
       correctAnswer: 'B',
       explanation:
-        'ESM 的匯入會反映來源綁定目前的值。increment() 在來源模組更新 count，第二次讀取就會得到 3。',
+        'ES 模組的匯入會反映來源綁定目前的值。increment() 在來源模組更新 count，第二次讀取就會得到 3。',
     },
     {
       id: 'day-06-03',
       number: 3,
       kind: 'choice',
       learningGoal: '辨識具名匯出與預設匯入不匹配',
-      prompt: '以下程式在 Node.js ESM 環境中無法正常載入，問題在哪裡？',
+      prompt: '以下程式在 Node.js ES 模組環境中無法正常載入，問題在哪裡？',
       hint: '比對來源提供的匯出形式，以及使用端有沒有大括號。',
       code: '// grade.js\nexport function gradeAnswer(input, expected) {\n  return input === expected ? 10 : 0;\n}\n\n// main.js\nimport gradeAnswer from "./grade.js";\n\nconsole.log(gradeAnswer("export", "export"));',
       options: [
@@ -64,13 +64,13 @@ export const daySixQuiz: QuizDefinition = {
       id: 'day-06-04',
       number: 4,
       kind: 'exact-text',
-      learningGoal: '辨識 Node.js 明確指定 .js 使用 ESM 的套件設定',
+      learningGoal: '辨識 Node.js 明確指定 .js 使用 ES 模組的套件設定',
       prompt:
-        '依文章的 package.json 範例，要明確讓套件範圍內的 .js 使用 ESM，"type" 欄位應填入哪個字串值？只輸入值，不含引號。',
+        '依文章的 package.json 範例，要明確讓套件範圍內的 .js 使用 ES 模組，"type" 欄位應填入哪個字串值？只輸入值，不含引號。',
       hint: '本題問的是 JavaScript 模組格式設定，不是套件名稱或副檔名。',
       acceptedAnswers: ['module'],
       explanation:
-        '"type": "module" 明確指定這個套件範圍內的 .js 採用 ESM；.mjs 則是另一種以副檔名明確標示的方法。',
+        '"type": "module" 明確指定這個套件範圍內的 .js 採用 ES 模組；.mjs 則是另一種以副檔名明確標示的方法。',
     },
     {
       id: 'day-06-05',
@@ -82,7 +82,7 @@ export const daySixQuiz: QuizDefinition = {
       code: 'const { gradeAnswer } = ____("./grade.cjs");',
       acceptedAnswers: ['require'],
       explanation:
-        'CommonJS 以 require() 載入模組，回傳的物件對應來源的 module.exports；這裡的 { gradeAnswer } 是從回傳物件取出屬性，和 ESM 的具名匯入是不同機制。',
+        'CommonJS 以 require() 載入模組，回傳的物件對應來源的 module.exports；這裡的 { gradeAnswer } 是從回傳物件取出屬性，和 ES 模組的具名匯入是不同機制。',
     },
   ],
 };
