@@ -60,6 +60,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 6,
     title: 'ES 模組（ES Module）：現代 JavaScript 專案的邊界',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/es-modules/',
     loadQuiz: () => import('./day-06.data').then((module) => module.daySixQuiz),
   },
   {
