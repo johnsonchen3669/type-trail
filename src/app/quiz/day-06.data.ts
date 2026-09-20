@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const daySixQuiz: QuizDefinition = {
   id: 'day-06',
   day: 6,
-  title: 'ES 模組（ES Module）：現代 JavaScript 專案的邊界',
+  title: 'ES 模組：現代 JavaScript 專案的邊界',
   estimatedMinutes: 12,
   questions: [
     {
