@@ -64,9 +64,10 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-06.data').then((module) => module.daySixQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 7,
     title: '從 JavaScript 到 TypeScript：編譯時與執行時',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/compile-time-runtime/',
     loadQuiz: () => import('./day-07.data').then((module) => module.daySevenQuiz),
   },
   {

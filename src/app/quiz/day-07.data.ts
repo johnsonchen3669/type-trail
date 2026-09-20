@@ -17,7 +17,7 @@ export const daySevenQuiz: QuizDefinition = {
         { id: 'A', label: '型別註記會被保留，JavaScript Runtime 依它自動驗證每個參數' },
         { id: 'B', label: '型別註記通常會被移除；它協助編譯期檢查，但不會自動成為 Runtime 驗證' },
         { id: 'C', label: '型別註記會把錯誤的輸入自動轉換成宣告的型別' },
-        { id: 'D', label: '型別註記會讓所有函式在 Runtime 執行前先呼叫一次 API' },
+        { id: 'D', label: '型別註記只用來顯示編輯器提示，編譯器不會用它檢查呼叫端' },
       ],
       correctAnswer: 'B',
       explanation:
@@ -29,14 +29,14 @@ export const daySevenQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '區分編譯期錯誤與忽略錯誤後的 Runtime 行為',
       prompt:
-        '在 strict: true 的 TypeScript 專案中，以下程式會先出現什麼編譯期結果？如果忽略錯誤，直接執行移除型別後的 JavaScript，又會發生什麼？',
+        '以下程式在編譯期會發生什麼事？再假設把 : string 移除，將其餘程式當作 JavaScript 執行，會發生什麼事？',
       hint: '先檢查函式宣告的參數型別，再檢查 Runtime 會對實際傳入的值呼叫哪個方法。',
       code: 'function upper(text: string) {\n  return text.toUpperCase();\n}\n\nconst result = upper(42);',
       options: [
-        { id: 'A', label: '編譯通過，Runtime 輸出 42' },
-        { id: 'B', label: '編譯指出參數型別不符；若仍執行輸出的 JavaScript，會拋出 TypeError' },
-        { id: 'C', label: '編譯指出參數型別不符；若仍執行輸出的 JavaScript，會自動把 42 轉成字串' },
-        { id: 'D', label: '編譯與 Runtime 都沒有問題，因為函式參數的型別只影響編輯器顏色' },
+        { id: 'A', label: '編譯通過；執行 JavaScript 後，result 會是 42' },
+        { id: 'B', label: '編譯指出參數型別不符；執行 JavaScript 時會拋出 TypeError' },
+        { id: 'C', label: '編譯指出參數型別不符；執行 JavaScript 時會自動把 42 轉成字串' },
+        { id: 'D', label: '編譯指出參數型別不符；執行 JavaScript 後，result 會是 undefined' },
       ],
       correctAnswer: 'B',
       explanation:
@@ -48,7 +48,7 @@ export const daySevenQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '區分全域與專案安裝的 TypeScript 編譯器',
       prompt:
-        '開發者已在專案中執行以下命令：npm install --save-dev typescript@7.0。接著他只執行 tsc --version，便認定輸出的一定是這個專案安裝的 TypeScript 版本。這個判斷最需要注意什麼？',
+        '開發者在專案中執行以下命令，看到版本號後，便認定它一定來自這個專案安裝的 TypeScript。這個判斷有什麼問題？',
       hint: '比較文章中全域安裝與專案安裝分別使用的版本確認命令。',
       code: 'npm install --save-dev typescript@7.0\ntsc --version',
       options: [
@@ -58,7 +58,7 @@ export const daySevenQuiz: QuizDefinition = {
         },
         { id: 'B', label: 'tsc --version 一定會讀取專案 lockfile，因此不可能取得全域版本' },
         { id: 'C', label: 'npx tsc 每次都只會下載最新版，不能使用專案中的 TypeScript' },
-        { id: 'D', label: '專案安裝的 TypeScript 只能由瀏覽器執行，不能在終端使用' },
+        { id: 'D', label: '安裝專案版本時，npm 會同步更新全域版，所以 tsc --version 和 npx tsc --version 一定相同' },
       ],
       correctAnswer: 'A',
       explanation:
