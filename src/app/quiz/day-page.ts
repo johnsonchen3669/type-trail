@@ -33,7 +33,7 @@ type DayPageState =
       }
       @default {
         <section class="grid flex-1 place-items-center px-5" aria-busy="true" aria-live="polite">
-          <span class="size-10 animate-spin rounded-full border-[3px] border-[color:var(--line)] border-t-[color:var(--blue)]" aria-hidden="true"></span>
+          <span class="size-3 animate-pulse rounded-full bg-[color:var(--blue)]" aria-hidden="true"></span>
           <span class="sr-only">正在確認路線…</span>
         </section>
       }
@@ -61,6 +61,13 @@ type DayPageState =
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+    :host {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+    }
+  `,
 })
 export class DayPage {
   private readonly route = inject(ActivatedRoute);
