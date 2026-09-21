@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, from, map, of, startWith, switchMap } from 'rxjs';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { findQuizEntry, PublishedQuizEntry, UpcomingQuizEntry } from './quiz-catalog';
 import { QuizDefinition } from './quiz.models';
 import { QuizPage } from './quiz-page';
@@ -15,8 +16,16 @@ type DayPageState =
 
 @Component({
   selector: 'app-day-page',
-  imports: [NgTemplateOutlet, RouterLink, QuizPage],
+  imports: [NgTemplateOutlet, RouterLink, QuizPage, NgxSpinnerComponent],
   template: `
+    <ngx-spinner
+      name="day-loader"
+      type="ball-scale-pulse"
+      [fullScreen]="false"
+      bdColor="transparent"
+      size="medium"
+      color="var(--blue)"
+    />
     @switch (state().kind) {
       @case ('published') {
         @if (publishedState(); as published) {
@@ -33,7 +42,6 @@ type DayPageState =
       }
       @default {
         <section class="grid flex-1 place-items-center px-5" aria-busy="true" aria-live="polite">
-          <span class="size-3 animate-pulse rounded-full bg-[color:var(--blue)]" aria-hidden="true"></span>
           <span class="sr-only">正在確認路線…</span>
         </section>
       }
@@ -66,11 +74,13 @@ type DayPageState =
       display: flex;
       flex: 1 1 auto;
       flex-direction: column;
+      position: relative;
     }
   `,
 })
 export class DayPage {
   private readonly route = inject(ActivatedRoute);
+  private readonly spinnerService = inject(NgxSpinnerService);
 
   protected readonly state = toSignal(
     this.route.paramMap.pipe(
@@ -91,6 +101,16 @@ export class DayPage {
     ),
     { initialValue: { kind: 'loading' } as DayPageState },
   );
+
+  constructor() {
+    effect(() => {
+      if (this.state().kind === 'loading') {
+        void this.spinnerService.show('day-loader');
+      } else {
+        void this.spinnerService.hide('day-loader');
+      }
+    });
+  }
 
   protected publishedState(): Extract<DayPageState, { kind: 'published' }> | null {
     const state = this.state();
