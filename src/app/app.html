@@ -1,6 +1,6 @@
 <a class="sr-only z-50 rounded-md bg-[var(--ink)] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4" href="#main-content">跳到主要內容</a>
 
-<div class="min-h-screen overflow-hidden">
+<div class="flex min-h-screen flex-col overflow-hidden">
   <header class="relative z-20 border-b border-[color:var(--line)] bg-[color:var(--paper)/0.88] backdrop-blur-xl">
     <div class="mx-auto flex max-w-[1180px] items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
       <a class="group flex items-center gap-3" routerLink="/" aria-label="型旅 TypeTrail 首頁">
@@ -17,7 +17,7 @@
     </div>
   </header>
 
-  <main id="main-content"><router-outlet /></main>
+  <main id="main-content" class="flex flex-1 flex-col"><router-outlet /></main>
 
   <footer class="border-t border-[var(--line)] bg-white/40">
     <div class="mx-auto flex max-w-[1180px] flex-col gap-2 px-5 py-8 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">

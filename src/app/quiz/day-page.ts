@@ -32,14 +32,15 @@ type DayPageState =
         <ng-container *ngTemplateOutlet="locked" />
       }
       @default {
-        <section class="grid min-h-[65vh] place-items-center px-5" aria-live="polite">
-          <p class="font-mono text-sm text-[var(--muted)]">正在確認路線…</p>
+        <section class="grid flex-1 place-items-center px-5" aria-busy="true" aria-live="polite">
+          <span class="size-10 animate-spin rounded-full border-[3px] border-[color:var(--line)] border-t-[color:var(--blue)]" aria-hidden="true"></span>
+          <span class="sr-only">正在確認路線…</span>
         </section>
       }
     }
 
     <ng-template #locked let-title="title" let-day="day">
-      <section class="relative isolate grid min-h-[65vh] place-items-center overflow-hidden px-5 py-16 text-center">
+      <section class="relative isolate grid min-h-[65vh] flex-1 place-items-center overflow-hidden px-5 py-16 text-center">
         <div class="trail-grid pointer-events-none absolute inset-0 -z-10 opacity-70" aria-hidden="true"></div>
         <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-28 w-px bg-[var(--line)]" aria-hidden="true"></div>
         <div class="max-w-2xl">
