@@ -71,9 +71,10 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-07.data').then((module) => module.daySevenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 8,
     title: '型別推論：讓 TypeScript 自己理解程式',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/type-inference/',
     loadQuiz: () => import('./day-08.data').then((module) => module.dayEightQuiz),
   },
   {
