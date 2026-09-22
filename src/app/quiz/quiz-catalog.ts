@@ -85,7 +85,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-09.data').then((module) => module.dayNineQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 10,
     title: 'Literal 與 Union：用型別表達業務規則',
     loadQuiz: () => import('./day-10.data').then((module) => module.dayTenQuiz),
