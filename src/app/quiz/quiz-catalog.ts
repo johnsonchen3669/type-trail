@@ -80,7 +80,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 9,
-    title: 'Object Type：從資料結構開始建模',
+    title: '物件型別：從資料結構開始建模',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/object-type/',
     loadQuiz: () => import('./day-09.data').then((module) => module.dayNineQuiz),
   },
   {
