@@ -27,7 +27,7 @@ export const dayTenQuiz: QuizDefinition = {
       id: 'day-10-02',
       number: 2,
       kind: 'choice',
-      learningGoal: '判斷多個 boolean 允許的無效組合',
+      learningGoal: '辨識多個 boolean 允許的無效組合',
       prompt: '以下資料想表示題目只能是選擇題或填空題。哪一項描述最準確？',
       hint: '檢查兩個欄位是否互相限制，以及 true/true 表示什麼。',
       code: 'type QuestionFlags = {\n  isChoice: boolean;\n  isFill: boolean;\n};\n\nconst question: QuestionFlags = {\n  isChoice: true,\n  isFill: true,\n};',
