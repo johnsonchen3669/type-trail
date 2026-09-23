@@ -1,0 +1,12 @@
+import { QuizDefinition } from './quiz.models';
+
+export const dayTwentyTwoQuiz: QuizDefinition = {
+  id: 'day-22', day: 22, title: 'infer：理解函式庫如何推導型別', estimatedMinutes: 12,
+  questions: [
+    { id: 'day-22-01', number: 1, kind: 'choice', learningGoal: '理解 infer 的作用位置', prompt: 'type ElementOf<T> = T extends (infer Item)[] ? Item : T 中的 Item 是什麼？', hint: '它不是 Runtime 變數，請看它出現的位置。', options: [{ id: 'A', label: '比對陣列結構時暫時推導出的元素型別' }, { id: 'B', label: '陣列第一個元素的 Runtime 值' }, { id: 'C', label: '固定名稱為 Item 的全域型別' }, { id: 'D', label: '一定等於 string 的型別' }], correctAnswer: 'A', explanation: 'infer Item 讓 TypeScript 在 conditional type 比對陣列時擷取元素型別；Item 只存在於型別推導過程。' },
+    { id: 'day-22-02', number: 2, kind: 'choice', learningGoal: '從函式結構取得回傳型別', prompt: '以下型別的結果是什麼？', hint: 'infer Output 放在函式箭頭的哪一側？', code: 'type OutputOf<T> = T extends (...args: never[]) => infer Output\n  ? Output\n  : never;\n\ntype Result = OutputOf<() => Question[]>;', options: [{ id: 'A', label: 'Question[]' }, { id: 'B', label: '() => Question[]' }, { id: 'C', label: 'never' }, { id: 'D', label: 'unknown[]' }], correctAnswer: 'A', explanation: '來源符合函式型別，且 infer Output 位於回傳位置，因此 Result 是 Question[]。' },
+    { id: 'day-22-03', number: 3, kind: 'choice', learningGoal: '區分取出 Promise 與取出完成值', prompt: '若呼叫端需要 await 後的 Question，以下宣告問題在哪裡？', hint: '先寫出 ReturnType 的結果，再判斷它是否還包著 Promise。', code: 'declare function loadQuestion(): Promise<Question>;\n\ntype LoadedQuestion = ReturnType<typeof loadQuestion>;', options: [{ id: 'A', label: 'ReturnType 會得到 Promise<Question>，還需要 Awaited 或等價拆解' }, { id: 'B', label: 'ReturnType 只能用在同步函式' }, { id: 'C', label: 'Question 不能作為泛型參數' }, { id: 'D', label: 'typeof 會在 Runtime 呼叫函式' }], correctAnswer: 'A', explanation: '非同步函式的回傳型別是 Promise<Question>；ReturnType 不會自動取出 await 後的完成值。' },
+    { id: 'day-22-04', number: 4, kind: 'exact-text', learningGoal: '辨識不符合 conditional type 時的結果', prompt: '在 OutputOf 工具中，當 T 不是函式時會得到什麼型別？', hint: '查看 conditional type 冒號後的 false 分支。', acceptedAnswers: ['never'], explanation: '不符合函式結構時選擇 false 分支，也就是 never。' },
+    { id: 'day-22-05', number: 5, kind: 'code-fill', learningGoal: '使用 infer 取出 Promise 完成值', prompt: '請補上名稱，讓 Loaded 代表 Promise<Question> 完成後的型別。', hint: '條件中的暫時名稱必須和 true 分支回傳的名稱一致。', code: 'type Unwrap<T> = T extends Promise<infer ____> ? Value : never;\ntype Loaded = Unwrap<Promise<Question>>;', acceptedAnswers: ['Value'], explanation: 'infer Value 會從 Promise<Question> 取出 Question；填入的名稱需要和 true 分支的 Value 對上。' },
+  ],
+};

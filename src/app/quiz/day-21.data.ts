@@ -1,0 +1,12 @@
+import { QuizDefinition } from './quiz.models';
+
+export const dayTwentyOneQuiz: QuizDefinition = {
+  id: 'day-21', day: 21, title: '映射型別與條件型別', estimatedMinutes: 12,
+  questions: [
+    { id: 'day-21-01', number: 1, kind: 'choice', learningGoal: '理解 mapped type 會依鍵名建立新欄位', prompt: 'type Flags<T> = { [Key in keyof T]: boolean } 最準確的描述是什麼？', hint: '先看 in keyof T 取得的是鍵名還是值。', options: [{ id: 'A', label: '依 T 的每個鍵建立 boolean 欄位' }, { id: 'B', label: '把 T 的所有值在 Runtime 改成 boolean' }, { id: 'C', label: '只保留 T 中值為 boolean 的欄位' }, { id: 'D', label: '讓 T 的所有欄位變成可選' }], correctAnswer: 'A', explanation: 'mapped type 遍歷 keyof T 的鍵名，並為每個鍵產生指定的值型別；它不會在 Runtime 改變物件。' },
+    { id: 'day-21-02', number: 2, kind: 'choice', learningGoal: '判斷 -? 移除可選修飾', prompt: '以下型別中，Complete 的 prompt 是否可以省略？', hint: '? 前的負號會如何處理來源修飾子？', code: 'interface Draft {\n  prompt?: string;\n  answer?: string;\n}\n\ntype Complete = {\n  [Key in keyof Draft]-?: Draft[Key];\n};', options: [{ id: 'A', label: '可以，因為 -? 會新增可選' }, { id: 'B', label: '不可以，-? 會移除可選修飾' }, { id: 'C', label: '可以，因為 mapped type 只檢查鍵名' }, { id: 'D', label: '不可以，因為 Complete 沒有任何欄位' }], correctAnswer: 'B', explanation: '-? 會移除來源欄位的 optional 修飾，所以 Complete 的 prompt 與 answer 都必須存在；它不會替物件補值。' },
+    { id: 'day-21-03', number: 3, kind: 'choice', learningGoal: '辨識 mapped type 不會建立 Runtime 資料', prompt: '以下程式的問題是什麼？', hint: '比較函式實際回傳的值與宣告的結果型別。', code: 'type Flags<T> = { [Key in keyof T]: boolean };\n\nfunction makeFlags<T>(value: T): Flags<T> {\n  return value;\n}', options: [{ id: 'A', label: 'keyof 只能用在 interface' }, { id: 'B', label: 'mapped type 會在 Runtime 自動把 value 轉成旗標' }, { id: 'C', label: 'value 沒有被實作成包含 boolean 欄位的 Flags<T>，宣告與回傳值不相符' }, { id: 'D', label: '泛型不能搭配 mapped type' }], correctAnswer: 'C', explanation: 'mapped type 只產生編譯期描述，函式仍要實際建立 boolean 形狀；直接回傳 value 沒有完成這個轉換。' },
+    { id: 'day-21-04', number: 4, kind: 'exact-text', learningGoal: '辨識 conditional type 的條件運算子', prompt: '請輸入 conditional type 中用來分隔條件與兩個結果分支的符號。', hint: '想想 JavaScript 條件運算式在條件之後使用的符號。', acceptedAnswers: ['?'], explanation: 'conditional type 使用 T extends U ? A : B；問號開始 true 分支，冒號後是 false 分支。' },
+    { id: 'day-21-05', number: 5, kind: 'code-fill', learningGoal: '使用 as never 從 mapped type 排除鍵', prompt: '請補上型別，讓 PublicQuestion 移除 answer 鍵。', hint: '被排除的鍵在 mapped type 中要產生哪個不可能的型別？', code: 'type WithoutAnswer<T> = {\n  [Key in keyof T as Key extends "answer" ? ____ : Key]: T[Key];\n};', acceptedAnswers: ['never'], explanation: '當 Key 是 answer 時產生 never，該鍵不會出現在結果型別；其他鍵保留原名稱。' },
+  ],
+};

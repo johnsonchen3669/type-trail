@@ -120,6 +120,54 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     title: 'Interface vs Type：從使用目的判斷',
     loadQuiz: () => import('./day-15.data').then((module) => module.dayFifteenQuiz),
   },
+  {
+    status: 'coming-soon',
+    day: 16,
+    title: '結構型別：長得一樣就可能相容',
+    loadQuiz: () => import('./day-16.data').then((module) => module.daySixteenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 17,
+    title: 'Function Type：函式也是資料契約',
+    loadQuiz: () => import('./day-17.data').then((module) => module.daySeventeenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 18,
+    title: 'Generic：保留輸入與輸出的關係',
+    loadQuiz: () => import('./day-18.data').then((module) => module.dayEighteenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 19,
+    title: 'keyof、typeof 與 Indexed Access',
+    loadQuiz: () => import('./day-19.data').then((module) => module.dayNineteenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 20,
+    title: 'Utility Types：從既有型別產生新型別',
+    loadQuiz: () => import('./day-20.data').then((module) => module.dayTwentyQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 21,
+    title: '映射型別與條件型別',
+    loadQuiz: () => import('./day-21.data').then((module) => module.dayTwentyOneQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 22,
+    title: 'infer：理解函式庫如何推導型別',
+    loadQuiz: () => import('./day-22.data').then((module) => module.dayTwentyTwoQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 23,
+    title: 'API 傳來的資料，TypeScript 知道嗎？',
+    loadQuiz: () => import('./day-23.data').then((module) => module.dayTwentyThreeQuiz),
+  },
 ];
 
 export const publishedQuizzes = quizCatalog.filter(
