@@ -111,11 +111,11 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
   [
     dayTenQuiz,
     {
-      'day-10-01': 'C',
-      'day-10-02': 'C',
+      'day-10-01': 'B',
+      'day-10-02': 'B',
       'day-10-03': 'B',
       'day-10-04': '|',
-      'day-10-05': '"in-progress"',
+      'day-10-05': 'QuestionType',
     },
   ],
   [
