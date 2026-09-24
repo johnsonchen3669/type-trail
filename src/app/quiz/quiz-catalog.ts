@@ -88,12 +88,14 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 10,
     title: '字面值與聯集：用型別表達業務規則',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/literal-and-union/',
     loadQuiz: () => import('./day-10.data').then((module) => module.dayTenQuiz),
   },
   {
     status: 'published',
     day: 11,
-    title: 'Narrowing：讓程式流程證明型別',
+    title: '型別縮小：讓條件判斷幫忙確認型別',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/type-narrowing/',
     loadQuiz: () => import('./day-11.data').then((module) => module.dayElevenQuiz),
   },
   {

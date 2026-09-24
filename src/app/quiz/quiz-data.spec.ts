@@ -127,7 +127,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-11-02': 'B',
       'day-11-03': 'C',
       'day-11-04': 'in',
-      'day-11-05': 'typeof score === "number"',
+      'day-11-05': 'undefined',
     },
   ],
   [
