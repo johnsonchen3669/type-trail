@@ -99,7 +99,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-11.data').then((module) => module.dayElevenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 12,
     title: 'Discriminated Union：不要用三個 Boolean 表達狀態',
     loadQuiz: () => import('./day-12.data').then((module) => module.dayTwelveQuiz),
