@@ -106,7 +106,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-12.data').then((module) => module.dayTwelveQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 13,
     title: 'any、unknown、never：三種不同的不確定性',
     loadQuiz: () => import('./day-13.data').then((module) => module.dayThirteenQuiz),
