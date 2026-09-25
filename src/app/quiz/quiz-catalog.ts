@@ -101,7 +101,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 12,
-    title: 'Discriminated Union：不要用三個 Boolean 表達狀態',
+    title: '可辨識聯集：一個欄位決定要帶哪些資料',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/discriminated-union/',
     loadQuiz: () => import('./day-12.data').then((module) => module.dayTwelveQuiz),
   },
   {
