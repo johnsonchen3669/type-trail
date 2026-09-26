@@ -108,7 +108,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 13,
-    title: 'any、unknown、never：三種不同的不確定性',
+    title: 'any、unknown、never：處理未知資料與遺漏分支',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/any-unknown-never/',
     loadQuiz: () => import('./day-13.data').then((module) => module.dayThirteenQuiz),
   },
   {
