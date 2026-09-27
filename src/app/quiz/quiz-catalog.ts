@@ -116,6 +116,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 14,
     title: '型別斷言：as 為什麼可能只是在欺騙自己？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/type-assertions/',
     loadQuiz: () => import('./day-14.data').then((module) => module.dayFourteenQuiz),
   },
   {
