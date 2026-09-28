@@ -10,7 +10,7 @@ export const dayFifteenQuiz: QuizDefinition = {
       id: 'day-15-01',
       number: 1,
       kind: 'choice',
-      learningGoal: '區分物件契約的語法選擇與 Runtime 驗證',
+      learningGoal: '區分描述物件的兩種寫法與執行時驗證',
       prompt: '只需要描述具有字串 id、prompt 的題目物件，沒有其他擴充需求。以下哪個說法正確？',
       hint: '比較兩種宣告對必要欄位的要求，再想想編譯後是否會留下檢查程式。',
       options: [
@@ -20,7 +20,7 @@ export const dayFifteenQuiz: QuizDefinition = {
         },
         {
           id: 'B',
-          label: 'interface 與 type 都能描述這個物件，但都不會自動驗證 Runtime 資料',
+          label: 'interface 與 type 都能描述這個物件，但都不會在執行時自動驗證資料',
         },
         {
           id: 'C',
@@ -28,42 +28,42 @@ export const dayFifteenQuiz: QuizDefinition = {
         },
         {
           id: 'D',
-          label: '使用 interface 描述物件前，必須先建立 class',
+          label: '使用 interface 宣告後，執行時會自動補上缺少的 prompt',
         },
       ],
       correctAnswer: 'B',
       explanation:
-        '兩者都能描述物件欄位，並支援可選欄位與 readonly。單純描述物件時可沿用專案慣例；兩種宣告都會在編譯後移除，不會新增 Runtime 驗證。',
+        '兩者都能描述物件欄位，並支援可選欄位與 readonly。單純描述物件時可沿用專案慣例；兩種宣告都會在編譯後移除，不會新增執行時驗證。',
     },
     {
       id: 'day-15-02',
       number: 2,
       kind: 'choice',
-      learningGoal: '判斷宣告合併後的必要欄位',
+      learningGoal: '判斷宣告合併後哪些欄位仍可省略',
       prompt: '以下程式放在同一個模組內，以 strict 設定檢查。TypeScript 會如何判斷？',
-      hint: '確認兩份同名宣告是互相覆蓋，還是一起構成同一份要求。',
-      code: 'interface QuizSettings {\n  title: string;\n}\n\ninterface QuizSettings {\n  showHint: boolean;\n}\n\nconst settings: QuizSettings = { title: "每日五問" };',
+      hint: '合併兩份宣告後，檢查每個欄位原本是否為必填。',
+      code: 'interface QuizCard {\n  prompt: string;\n}\n\ninterface QuizCard {\n  showHint?: boolean;\n}\n\nconst card: QuizCard = { prompt: "哪種寫法符合需求？" };',
       options: [
         {
           id: 'A',
-          label: '通過檢查，第二份宣告只用來補充文件',
+          label: '通過檢查；合併後 prompt 必填，showHint 仍可省略',
         },
         {
           id: 'B',
-          label: '同名 interface 一定造成重複名稱的編譯期錯誤',
+          label: '編譯期錯誤；合併後所有欄位都變成必填',
         },
         {
           id: 'C',
-          label: '編譯期錯誤，settings 缺少合併後要求的 showHint',
+          label: '編譯期錯誤；同名介面不能再次宣告',
         },
         {
           id: 'D',
-          label: '通過檢查，Runtime 會自動補上 showHint: false',
+          label: '通過檢查；第二份宣告覆蓋第一份',
         },
       ],
-      correctAnswer: 'C',
+      correctAnswer: 'A',
       explanation:
-        '同一作用域的兩份 QuizSettings 介面會合併，title 與 showHint 都是必要欄位。只有 title 的物件不符合要求；宣告合併也不會在 Runtime 補入預設值。',
+        '同一作用域的兩份 QuizCard 介面會合併，但不會改變欄位原本的可選性。card 提供必要的 prompt，省略可選的 showHint 仍能通過檢查；執行時也不會自動補入這個欄位。',
     },
     {
       id: 'day-15-03',
@@ -93,7 +93,7 @@ export const dayFifteenQuiz: QuizDefinition = {
       ],
       correctAnswer: 'A',
       explanation:
-        '交集要求同時滿足兩側型別，不會覆蓋欄位。id 的 string 與 number 要求衝突，結果是 never；填入字串或數字都不能通過。若需求是改變 ID 規格，應重新整理模型，而不是把 & 當成覆蓋操作。',
+        '交集要求同時滿足兩側型別，不會覆蓋欄位。id 的 string 與 number 要求衝突，結果是 never；填入字串或數字都不能通過。若需求是改變 ID 規格，應重新整理模型；& 不能拿來覆蓋原欄位。',
     },
     {
       id: 'day-15-04',
@@ -105,7 +105,7 @@ export const dayFifteenQuiz: QuizDefinition = {
       hint: '回想題庫中「一筆題目可能是哪一種」的模型，是如何替整個聯集取名字的。',
       acceptedAnswers: ['type'],
       explanation:
-        'type 可以替聯集命名，例如 type Question = ChoiceQuestion | FillQuestion。interface 不能直接替這個聯集命名；同時延伸兩種題型也不表示二選一。',
+        'type 可以替聯集命名，例如 type Question = ChoiceQuestion | FillQuestion。interface 不能直接替這個聯集命名。',
     },
     {
       id: 'day-15-05',
@@ -114,11 +114,11 @@ export const dayFifteenQuiz: QuizDefinition = {
       learningGoal: '用介面延伸保留基礎物件的要求',
       prompt:
         '請補上一個關鍵字，讓 ChoiceQuestion 保留 BaseQuestion 的必要欄位，並增加選擇題的欄位。',
-      hint: '這裡需要宣告新介面與既有物件契約的延伸關係。',
+      hint: '新介面要保留 BaseQuestion 的欄位，先想它們之間的關係。',
       code: 'interface BaseQuestion {\n  id: string;\n  prompt: string;\n}\n\ninterface ChoiceQuestion ____ BaseQuestion {\n  type: "choice";\n  options: string[];\n}',
       acceptedAnswers: ['extends'],
       explanation:
-        'extends 讓 ChoiceQuestion 保留 BaseQuestion 的 id、prompt 要求，再加入 type 與 options。它描述型別關係，不會在 Runtime 建立物件或補入資料。',
+        'extends 讓 ChoiceQuestion 保留 BaseQuestion 的 id、prompt 要求，再加入 type 與 options。它描述型別關係，不會在執行時建立物件或補入資料。',
     },
   ],
 };

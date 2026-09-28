@@ -123,6 +123,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 15,
     title: 'Interface vs Type：從使用目的判斷',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/interface-vs-type/',
     loadQuiz: () => import('./day-15.data').then((module) => module.dayFifteenQuiz),
   },
   {
