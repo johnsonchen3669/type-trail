@@ -134,7 +134,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-16.data').then((module) => module.daySixteenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 17,
     title: 'Function Type：函式也是資料契約',
     loadQuiz: () => import('./day-17.data').then((module) => module.daySeventeenQuiz),
