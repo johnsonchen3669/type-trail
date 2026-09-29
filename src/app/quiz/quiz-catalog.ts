@@ -130,6 +130,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 16,
     title: '結構型別：長得一樣就可能相容',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/structural-typing/',
     loadQuiz: () => import('./day-16.data').then((module) => module.daySixteenQuiz),
   },
   {
