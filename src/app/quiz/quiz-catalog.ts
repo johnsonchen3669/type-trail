@@ -136,7 +136,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 17,
-    title: 'Function Type：函式也是資料契約',
+    title: '函式型別：函式也是資料契約',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/function-types/',
     loadQuiz: () => import('./day-17.data').then((module) => module.daySeventeenQuiz),
   },
   {

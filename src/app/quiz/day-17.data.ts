@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const daySeventeenQuiz: QuizDefinition = {
   id: 'day-17',
   day: 17,
-  title: 'Function Type：函式也是資料契約',
+  title: '函式型別：函式也是資料契約',
   estimatedMinutes: 12,
   questions: [
     {
@@ -28,7 +28,7 @@ export const daySeventeenQuiz: QuizDefinition = {
         },
         {
           id: 'D',
-          label: '函式會在 Runtime 自動驗證答案內容',
+          label: '函式會在執行時自動驗證答案內容',
         },
       ],
       correctAnswer: 'B',
@@ -39,27 +39,27 @@ export const daySeventeenQuiz: QuizDefinition = {
       id: 'day-17-02',
       number: 2,
       kind: 'choice',
-      learningGoal: '理解 callback 可以忽略呼叫端提供的額外參數',
+      learningGoal: '理解回呼函式可以忽略呼叫端提供的額外參數',
       prompt: '以下程式通過 TypeScript 檢查後，會依序印出什麼？',
-      hint: 'callback 可以不宣告自己用不到的參數；接著看陣列元素的順序。',
-      code: 'type AnswerVisitor = (answer: string, index: number) => void;\n\nfunction visitAnswers(answers: string[], visit: AnswerVisitor): void {\n  answers.forEach((answer, index) => visit(answer, index));\n}\n\nvisitAnswers(["A", "B"], (answer) => {\n  console.log(answer);\n});',
+      hint: '回呼函式可以不宣告自己用不到的參數；接著看陣列元素的順序。',
+      code: 'type AnswerVisitor = (answer: string, index: number) => void;\n\nfunction visitAnswers(answers: string[], visit: AnswerVisitor): void {\n  answers.forEach((answer, index) => visit(answer, index));\n}\n\nvisitAnswers(["B", "C"], (answer) => {\n  console.log(answer);\n});',
       options: [
-        { id: 'A', label: '先印出 A，再印出 B' },
+        { id: 'A', label: '先印出 B，再印出 C' },
         { id: 'B', label: '先印出 0，再印出 1' },
-        { id: 'C', label: '編譯期錯誤，因為 callback 少了 index 參數' },
+        { id: 'C', label: '編譯期錯誤，因為回呼函式少了 index 參數' },
         { id: 'D', label: '兩次都印出 undefined' },
       ],
       correctAnswer: 'A',
       explanation:
-        'visitAnswers 每次都提供 answer 與 index，但 callback 可以只接收自己需要的 answer。陣列依序走訪，因此輸出 A、B。',
+        'visitAnswers 每次都提供 answer 與 index，但回呼函式可以只接收自己需要的 answer。陣列依序走訪，因此輸出 B、C。',
     },
     {
       id: 'day-17-03',
       number: 3,
       kind: 'choice',
-      learningGoal: '辨識 callback 選填參數代表呼叫端可能省略該值',
-      prompt: '以下 callback 型別與用法的問題是什麼？',
-      hint: 'index? 是給 callback 實作者的方便，還是呼叫端可以不傳的承諾？',
+      learningGoal: '辨識回呼函式選填參數代表呼叫端可能省略該值',
+      prompt: '以下回呼函式型別與用法的問題是什麼？',
+      hint: 'index? 是給回呼函式實作者的方便，還是呼叫端可以不傳的承諾？',
       code: 'type AnswerVisitor = (answer: string, index?: number) => void;\n\nconst showPosition: AnswerVisitor = (answer, index) => {\n  console.log(`${index.toFixed(0)}：${answer}`);\n};',
       options: [
         { id: 'A', label: 'answer 必須改成選填參數，才能和 index 搭配' },
@@ -67,20 +67,20 @@ export const daySeventeenQuiz: QuizDefinition = {
           id: 'B',
           label: 'index? 表示呼叫端可能省略索引，因此函式內不能直接呼叫 toFixed',
         },
-        { id: 'C', label: 'Callback 不允許回傳 void' },
+        { id: 'C', label: '回呼函式不允許回傳 void' },
         { id: 'D', label: '選填參數只能使用在一般函式，不能出現在函式型別中' },
       ],
       correctAnswer: 'B',
       explanation:
-        '選填參數表示呼叫端可以不提供該值，所以 index 的型別是 number | undefined。若流程每次都會提供索引，就應把它寫成必要參數；使用端仍可宣告只接收 answer 的 callback。',
+        '選填參數表示呼叫端可以不提供該值，所以 index 的型別是 number | undefined。若流程每次都會提供索引，就應把它寫成必要參數；使用端仍可宣告只接收 answer 的回呼函式。',
     },
     {
       id: 'day-17-04',
       number: 4,
       kind: 'exact-text',
-      learningGoal: '辨識沒有提供有意義回傳值的函式型別',
+      learningGoal: '辨識呼叫端不依賴回傳值的函式型別',
       prompt:
-        '(answer: string) => ____ 中，若呼叫端不使用 callback 的回傳值，空格應填入哪個 TypeScript 型別？只填小寫英文。',
+        '(answer: string) => ____ 中，若呼叫端不使用回呼函式的回傳值，空格應填入哪個 TypeScript 型別？只填小寫英文。',
       hint: '文章的 AnswerVisitor 使用這個型別表示呼叫端不依賴回傳結果。',
       acceptedAnswers: ['void'],
       explanation:
@@ -93,7 +93,7 @@ export const daySeventeenQuiz: QuizDefinition = {
       learningGoal: '使用剩餘參數接收數量不固定的字串',
       prompt:
         '請補上參數宣告，讓 joinFeedback 可以接收零到多個字串，並在函式內以 string[] 使用 messages。',
-      hint: '使用三個點把後續引數收集進 messages 陣列。',
+      hint: '想想收集多個引數的語法，以及字串陣列的型別寫法。',
       code: 'function joinFeedback(____): string {\n  return messages.join("；");\n}\n\njoinFeedback("答對了", "繼續保持");',
       acceptedAnswers: ['...messages: string[]'],
       explanation:

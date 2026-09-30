@@ -15,6 +15,7 @@ import { dayThirteenQuiz } from './day-13.data';
 import { dayFourteenQuiz } from './day-14.data';
 import { dayFifteenQuiz } from './day-15.data';
 import { daySixteenQuiz } from './day-16.data';
+import { daySeventeenQuiz } from './day-17.data';
 import { dayTwentyOneQuiz } from './day-21.data';
 import { dayTwentyTwoQuiz } from './day-22.data';
 import { gradeQuiz } from './quiz-engine';
@@ -179,6 +180,16 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-16-03': 'B',
       'day-16-04': '多餘屬性檢查',
       'day-16-05': 'requireQuestionId',
+    },
+  ],
+  [
+    daySeventeenQuiz,
+    {
+      'day-17-01': 'B',
+      'day-17-02': 'A',
+      'day-17-03': 'B',
+      'day-17-04': 'void',
+      'day-17-05': '...messages: string[]',
     },
   ],
   [
