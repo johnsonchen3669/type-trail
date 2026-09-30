@@ -141,7 +141,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-17.data').then((module) => module.daySeventeenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 18,
     title: 'Generic：保留輸入與輸出的關係',
     loadQuiz: () => import('./day-18.data').then((module) => module.dayEighteenQuiz),
