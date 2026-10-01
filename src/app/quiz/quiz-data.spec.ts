@@ -179,7 +179,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-16-02': 'B',
       'day-16-03': 'B',
       'day-16-04': '多餘屬性檢查',
-      'day-16-05': 'requireQuestionId',
+      'day-16-05': 'QuestionId',
     },
   ],
   [
