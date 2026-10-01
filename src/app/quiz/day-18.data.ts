@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const dayEighteenQuiz: QuizDefinition = {
   id: 'day-18',
   day: 18,
-  title: 'Generic：保留輸入與輸出的關係',
+  title: '泛型：保留輸入與輸出的關係',
   estimatedMinutes: 12,
   questions: [
     {
@@ -16,7 +16,7 @@ export const dayEighteenQuiz: QuizDefinition = {
       hint: '比較傳入 number[] 與 string[] 時，回傳型別會如何改變。',
       options: [
         { id: 'A', label: '函式只接受名為 T 的 JavaScript 類別' },
-        { id: 'B', label: '函式會在 Runtime 檢查陣列元素' },
+        { id: 'B', label: '函式會在執行時檢查陣列元素' },
         {
           id: 'C',
           label: '傳入哪一種元素的陣列，回傳值就保留該元素型別，並可能是 undefined',
@@ -33,17 +33,17 @@ export const dayEighteenQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '判斷泛型函式的推論結果',
       prompt: '以下程式中，result 的推論型別是什麼？',
-      hint: '先從引數 [10, 20] 推論 T，再代入回傳型別。',
-      code: 'function first<T>(items: T[]): T | undefined {\n  return items[0];\n}\n\nconst result = first([10, 20]);',
+      hint: '先從引數 [true, false] 推論 T，再代入回傳型別。',
+      code: 'function first<T>(items: T[]): T | undefined {\n  return items[0];\n}\n\nconst result = first([true, false]);',
       options: [
         { id: 'A', label: 'string | undefined' },
-        { id: 'B', label: 'number | undefined' },
+        { id: 'B', label: 'boolean | undefined' },
         { id: 'C', label: 'unknown' },
         { id: 'D', label: 'T[]' },
       ],
       correctAnswer: 'B',
       explanation:
-        '陣列引數讓 TypeScript 推論 T 為 number，因此 T | undefined 成為 number | undefined。',
+        '陣列引數讓 TypeScript 推論 T 為 boolean，因此 T | undefined 成為 boolean | undefined。',
     },
     {
       id: 'day-18-03',
@@ -78,13 +78,13 @@ export const dayEighteenQuiz: QuizDefinition = {
       id: 'day-18-05',
       number: 5,
       kind: 'code-fill',
-      learningGoal: '替泛型型別參數加入 id 欄位約束',
-      prompt: '請補上泛型宣告，讓函式本體可以安全讀取 item.id，同時保留每個元素的完整型別。',
-      hint: '使用 extends 表示 T 至少具有字串 id，不要把 T 直接替換成固定物件型別。',
-      code: 'function findById<____>(items: T[], id: string): T | undefined {\n  return items.find((item) => item.id === id);\n}',
-      acceptedAnswers: ['T extends { id: string }'],
+      learningGoal: '指定泛型介面中資料欄位的型別',
+      prompt: '補上型別，讓 response.data 必須是題目陣列。使用已宣告的 Question 搭配陣列語法 []。',
+      hint: '角括號內的型別會套用到 data，注意它包含的是一筆資料還是一組資料。',
+      code: 'interface Question {\n  id: string;\n  prompt: string;\n}\n\ninterface ApiResponse<T> {\n  data: T;\n  requestId: string;\n}\n\nconst response: ApiResponse<____> = {\n  data: [{ id: "q19", prompt: "泛型介面" }],\n  requestId: "req-19",\n};',
+      acceptedAnswers: ['Question[]'],
       explanation:
-        'T extends { id: string } 為型別參數設定最低要求，因此函式內可以讀取 id，回傳值仍是呼叫端傳入的完整 T。',
+        'ApiResponse 的 data 使用型別參數 T。指定 Question[] 後，data 就必須符合題目陣列的型別，requestId 仍維持 string。',
     },
   ],
 };

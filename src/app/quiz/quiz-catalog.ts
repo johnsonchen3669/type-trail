@@ -143,7 +143,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 18,
-    title: 'Generic：保留輸入與輸出的關係',
+    title: '泛型：保留輸入與輸出的關係',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/generics/',
     loadQuiz: () => import('./day-18.data').then((module) => module.dayEighteenQuiz),
   },
   {
