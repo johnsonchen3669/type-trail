@@ -17,6 +17,7 @@ import { dayFifteenQuiz } from './day-15.data';
 import { daySixteenQuiz } from './day-16.data';
 import { daySeventeenQuiz } from './day-17.data';
 import { dayEighteenQuiz } from './day-18.data';
+import { dayNineteenQuiz } from './day-19.data';
 import { dayTwentyOneQuiz } from './day-21.data';
 import { dayTwentyTwoQuiz } from './day-22.data';
 import { gradeQuiz } from './quiz-engine';
@@ -201,6 +202,16 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-18-03': 'C',
       'day-18-04': 'T',
       'day-18-05': 'Question[]',
+    },
+  ],
+  [
+    dayNineteenQuiz,
+    {
+      'day-19-01': 'B',
+      'day-19-02': 'C',
+      'day-19-03': 'B',
+      'day-19-04': 'keyof',
+      'day-19-05': '"score"',
     },
   ],
   [

@@ -150,7 +150,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 19,
-    title: 'keyof、typeof 與 Indexed Access',
+    title: 'keyof、typeof 與索引存取型別：避免重複維護型別',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/type-operators/',
     loadQuiz: () => import('./day-19.data').then((module) => module.dayNineteenQuiz),
   },
   {
