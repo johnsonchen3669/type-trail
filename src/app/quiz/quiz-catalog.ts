@@ -155,7 +155,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-19.data').then((module) => module.dayNineteenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 20,
     title: 'Utility Types：從既有型別產生新型別',
     loadQuiz: () => import('./day-20.data').then((module) => module.dayTwentyQuiz),
