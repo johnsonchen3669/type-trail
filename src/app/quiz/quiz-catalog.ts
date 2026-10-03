@@ -157,7 +157,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 20,
-    title: 'Utility Types：從既有型別產生新型別',
+    title: '工具型別：從既有型別產生新型別',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/utility-types/',
     loadQuiz: () => import('./day-20.data').then((module) => module.dayTwentyQuiz),
   },
   {
