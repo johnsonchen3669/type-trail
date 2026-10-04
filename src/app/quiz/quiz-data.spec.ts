@@ -18,9 +18,17 @@ import { daySixteenQuiz } from './day-16.data';
 import { daySeventeenQuiz } from './day-17.data';
 import { dayEighteenQuiz } from './day-18.data';
 import { dayNineteenQuiz } from './day-19.data';
-import { dayTwentyQuiz } from './day-20.data';
 import { dayTwentyOneQuiz } from './day-21.data';
 import { dayTwentyTwoQuiz } from './day-22.data';
+import { dayTwentyFourQuiz } from './day-24.data';
+import { dayTwentyFiveQuiz } from './day-25.data';
+import { dayTwentySixQuiz } from './day-26.data';
+import { dayTwentySevenQuiz } from './day-27.data';
+import { dayTwentyEightQuiz } from './day-28.data';
+import { dayTwentyNineQuiz } from './day-29.data';
+import { dayThirtyQuiz } from './day-30.data';
+import { dayTwentyThreeQuiz } from './day-23.data';
+import { dayTwentyQuiz } from './day-20.data';
 import { gradeQuiz } from './quiz-engine';
 import { QuizDefinition } from './quiz.models';
 
@@ -216,16 +224,6 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
     },
   ],
   [
-    dayTwentyQuiz,
-    {
-      'day-20-01': 'B',
-      'day-20-02': 'B',
-      'day-20-03': 'C',
-      'day-20-04': 'Readonly',
-      'day-20-05': 'Awaited',
-    },
-  ],
-  [
     dayTwentyOneQuiz,
     {
       'day-21-01': 'A',
@@ -245,6 +243,84 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-22-05': 'Value',
     },
   ],
+  [
+    dayTwentyFourQuiz,
+    {
+      'day-24-01': 'B',
+      'day-24-02': 'B',
+      'day-24-03': 'B',
+      'day-24-04': 'DTO',
+      'day-24-05': 'toISOString',
+    },
+  ],
+  [
+    dayTwentyFiveQuiz,
+    {
+      'day-25-01': 'B',
+      'day-25-02': 'B',
+      'day-25-03': 'B',
+      'day-25-04': 'QUESTION_NOT_FOUND',
+      'day-25-05': 'isInteger',
+    },
+  ],
+  [
+    dayTwentySixQuiz,
+    {
+      'day-26-01': 'A',
+      'day-26-02': 'B',
+      'day-26-03': 'B',
+      'day-26-04': 'metadata',
+      'day-26-05': 'inject',
+    },
+  ],
+  [
+    dayTwentySevenQuiz,
+    {
+      'day-27-01': 'B',
+      'day-27-02': 'B',
+      'day-27-03': 'B',
+      'day-27-04': 'unknown',
+      'day-27-05': 'QUESTION_NOT_FOUND',
+    },
+  ],
+  [
+    dayTwentyEightQuiz,
+    {
+      'day-28-01': 'B',
+      'day-28-02': 'B',
+      'day-28-03': 'A',
+      'day-28-04': 'refused',
+      'day-28-05': '>=',
+    },
+  ],
+  [dayTwentyNineQuiz, {
+    'day-29-01': 'B',
+    'day-29-02': 'D',
+    'day-29-03': 'A',
+    'day-29-04': 'invalid_input',
+    'day-29-05': '"found"',
+  }],
+  [dayThirtyQuiz, {
+    'day-30-01': 'C',
+    'day-30-02': 'B',
+    'day-30-03': 'D',
+    'day-30-04': 'structuredContent',
+    'day-30-05': 'isError',
+  }],
+  [dayTwentyThreeQuiz, {
+    'day-23-01': 'B',
+    'day-23-02': 'B',
+    'day-23-03': 'C',
+    'day-23-04': 'safeParse',
+    'day-23-05': 'infer',
+  }],
+  [dayTwentyQuiz, {
+    'day-20-01': 'B',
+    'day-20-02': 'B',
+    'day-20-03': 'C',
+    'day-20-04': 'Readonly',
+    'day-20-05': 'Awaited',
+  }],
 ];
 
 describe('quiz data', () => {

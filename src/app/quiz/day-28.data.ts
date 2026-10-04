@@ -1,0 +1,71 @@
+import { QuizDefinition } from './quiz.models';
+
+export const dayTwentyEightQuiz: QuizDefinition = {
+  id: 'day-28',
+  day: 28,
+  title: 'Structured Output：讓 AI 回傳可驗證的題目資料',
+  estimatedMinutes: 12,
+  questions: [
+    {
+      id: 'day-28-01', number: 1, kind: 'choice',
+      learningGoal: '區分 JSON 語法與結構化輸出的 Schema 約束',
+      prompt: '請模型回傳 JSON 與使用本文的結構化輸出，主要差在哪裡？',
+      hint: '想想欄位是否存在、型別是否符合規則由誰約束。',
+      options: [
+        { id: 'A', label: '只要是合法 JSON，就一定有四個選項且答案正確' },
+        { id: 'B', label: '結構化輸出依 Schema 約束必要欄位與型別；題目內容仍須另外檢查' },
+        { id: 'C', label: 'JSON 模式會自動檢查正確選項的位置' },
+        { id: 'D', label: '結構化輸出會直接把題目寫進題庫' },
+      ],
+      correctAnswer: 'B',
+      explanation: 'JSON 格式正確不等於欄位與題目規則正確。結構化輸出約束 Schema 描述的形狀，應用程式仍須驗證索引、選項與內容。',
+    },
+    {
+      id: 'day-28-02', number: 2, kind: 'choice',
+      learningGoal: '判斷 Schema 通過後仍會被題目規則拒絕的資料',
+      prompt: '假設模型回應已完成且沒有拒絕，下列值也符合 GeneratedQuestion 的欄位型別。依文章的四選一規則會得到哪個狀態？',
+      hint: '索引要落在四個選項的有效位置內。',
+      code: 'const question = {\n  prompt: "哪個是字串？",\n  options: ["42", "true", "null", "\\"hi\\""],\n  correctOptionIndex: 4,\n};',
+      options: [
+        { id: 'A', label: 'ready，因為 4 是整數' },
+        { id: 'B', label: 'invalid，因為四個選項只有 0 到 3 這些位置' },
+        { id: 'C', label: 'refused，因為題幹含問號' },
+        { id: 'D', label: 'unavailable，因為陣列不能放字串' },
+      ],
+      correctAnswer: 'B',
+      explanation: 'Schema 容許整數，但應用程式還要檢查位置是否小於選項數量；4 超出範圍。',
+    },
+    {
+      id: 'day-28-03', number: 3, kind: 'choice',
+      learningGoal: '辨識忽略拒絕與缺少解析結果的風險',
+      prompt: '下列呼叫端想直接使用產生的題幹，最需要補上哪項處理？',
+      hint: '模型拒絕或回應未完成時，能否確定拿到題目？',
+      code: 'const response = await client.responses.parse(request);\nconsole.log(response.output_parsed.prompt);',
+      options: [
+        { id: 'A', label: '先確認回應完成、沒有拒絕，且 output_parsed 有值，再使用題目' },
+        { id: 'B', label: '把 output_parsed 改成 as QuestionDraft 就能處理拒絕' },
+        { id: 'C', label: '只要 await 完成，output_parsed 一定有值' },
+        { id: 'D', label: '把 prompt 改名，讓 SDK 自動重試' },
+      ],
+      correctAnswer: 'A',
+      explanation: '拒絕與未完成可能沒有符合 Schema 的題目；直接讀取 output_parsed.prompt 會跳過必要的失敗分支。',
+    },
+    {
+      id: 'day-28-04', number: 4, kind: 'exact-text',
+      learningGoal: '辨識模型拒絕時的結果狀態',
+      prompt: '依本文的 GenerationResult，模型拒絕產生題目時，status 的字串值是什麼？',
+      hint: '這個分支與題目規則不符及請求失敗分開。',
+      acceptedAnswers: ['refused'],
+      explanation: 'refused 是模型拒絕的結果，不應當作一般的無效題目反覆重試。',
+    },
+    {
+      id: 'day-28-05', number: 5, kind: 'code-fill',
+      learningGoal: '補上正確選項索引的上界檢查',
+      prompt: '補上文章中判斷索引是否超出選項範圍的比較運算子。',
+      hint: '索引若等於選項數量，也已經沒有對應選項。',
+      code: 'if (question.correctOptionIndex ____ options.length) {\n  return { status: "invalid" };\n}',
+      acceptedAnswers: ['>='],
+      explanation: '陣列最後一個有效索引是 options.length - 1，因此等於或大於長度都應拒絕。',
+    },
+  ],
+};

@@ -179,6 +179,48 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     title: 'API 傳來的資料，TypeScript 知道嗎？',
     loadQuiz: () => import('./day-23.data').then((module) => module.dayTwentyThreeQuiz),
   },
+  {
+    status: 'coming-soon',
+    day: 24,
+    title: 'API 型別設計：一份題目需要幾種資料？',
+    loadQuiz: () => import('./day-24.data').then((module) => module.dayTwentyFourQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 25,
+    title: '錯誤也是型別：讓判分失敗有明確結果',
+    loadQuiz: () => import('./day-25.data').then((module) => module.dayTwentyFiveQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 26,
+    title: '類別、裝飾器與依賴注入：讀懂 Angular 的程式結構',
+    loadQuiz: () => import('./day-26.data').then((module) => module.dayTwentySixQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 27,
+    title: '如何審查 AI 生成的 TypeScript？',
+    loadQuiz: () => import('./day-27.data').then((module) => module.dayTwentySevenQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 28,
+    title: 'Structured Output：讓 AI 回傳可驗證的題目資料',
+    loadQuiz: () => import('./day-28.data').then((module) => module.dayTwentyEightQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 29,
+    title: '工具呼叫：讓 AI 透過程式完成操作',
+    loadQuiz: () => import('./day-29.data').then((module) => module.dayTwentyNineQuiz),
+  },
+  {
+    status: 'coming-soon',
+    day: 30,
+    title: 'MCP 與 AI 代理：把工具接進應用程式',
+    loadQuiz: () => import('./day-30.data').then((module) => module.dayThirtyQuiz),
+  },
 ];
 
 export const publishedQuizzes = quizCatalog.filter(
