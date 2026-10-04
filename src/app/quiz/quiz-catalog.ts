@@ -162,9 +162,10 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-20.data').then((module) => module.dayTwentyQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 21,
-    title: '映射型別與條件型別',
+    title: '映射型別、條件型別與元組',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/mapped-and-conditional-types/',
     loadQuiz: () => import('./day-21.data').then((module) => module.dayTwentyOneQuiz),
   },
   {

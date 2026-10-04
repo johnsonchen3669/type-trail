@@ -229,8 +229,8 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-21-01': 'A',
       'day-21-02': 'B',
       'day-21-03': 'C',
-      'day-21-04': '?',
-      'day-21-05': 'never',
+      'day-21-04': 'input',
+      'day-21-05': 'number',
     },
   ],
   [
