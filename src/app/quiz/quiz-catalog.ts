@@ -169,7 +169,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-21.data').then((module) => module.dayTwentyOneQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 22,
     title: 'infer：理解函式庫如何推導型別',
     loadQuiz: () => import('./day-22.data').then((module) => module.dayTwentyTwoQuiz),
