@@ -172,6 +172,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 22,
     title: 'infer：理解函式庫如何推導型別',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/infer/',
     loadQuiz: () => import('./day-22.data').then((module) => module.dayTwentyTwoQuiz),
   },
   {
