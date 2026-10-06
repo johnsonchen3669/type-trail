@@ -176,9 +176,10 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-22.data').then((module) => module.dayTwentyTwoQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 23,
     title: 'API 傳來的資料，TypeScript 知道嗎？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/runtime-schema/',
     loadQuiz: () => import('./day-23.data').then((module) => module.dayTwentyThreeQuiz),
   },
   {

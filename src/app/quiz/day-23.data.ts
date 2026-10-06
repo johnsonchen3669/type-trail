@@ -9,30 +9,18 @@ export const dayTwentyThreeQuiz: QuizDefinition = {
     {
       number: 1,
       kind: 'choice',
-      learningGoal: '分辨型別斷言與執行時驗證',
-      prompt: '執行 payload as Question 時，實際發生什麼事？',
-      hint: '想想這個寫法影響編譯器，還是會讀取執行時資料。',
+      learningGoal: '理解執行時資料驗證的用途',
+      prompt: '程式已經有 TypeScript 型別宣告，為什麼還要用 Zod 驗證 API 回應？',
+      hint: '想想型別檢查與 API 資料到達程式的時間點。',
       options: [
-        {
-          id: 'A',
-          label: '執行時逐一檢查 Question 的欄位',
-        },
-        {
-          id: 'B',
-          label: 'TypeScript 依 Question 檢查後續程式，執行時不會檢查資料',
-        },
-        {
-          id: 'C',
-          label: '自動替缺少的欄位補上預設值',
-        },
-        {
-          id: 'D',
-          label: '把數字欄位轉成字串',
-        },
+        { id: 'A', label: 'Zod 會將 TypeScript 程式編譯成 JavaScript' },
+        { id: 'B', label: 'Zod 在執行時檢查實際回應，讓程式在使用資料前處理格式錯誤' },
+        { id: 'C', label: 'Zod 會自動重試失敗的 API 請求' },
+        { id: 'D', label: 'Zod 會確認題目答案的內容正確' },
       ],
       correctAnswer: 'B',
       explanation:
-        'as Question 是型別斷言，只影響 TypeScript 編譯期的型別判斷；JavaScript 執行時不會因這行檢查或修改物件。',
+        'TypeScript 檢查程式如何使用資料，Zod 則檢查實際收到的值是否符合 Schema。程式可以先處理驗證失敗，再將符合規則的資料交給後續流程。',
       id: 'day-23-01',
     },
     {
@@ -56,7 +44,7 @@ export const dayTwentyThreeQuiz: QuizDefinition = {
         },
         {
           id: 'D',
-          label: 'false，因為 safeParse 只接受 JSON 字串',
+          label: 'false，因為 id 必須至少有三個字元',
         },
       ],
       correctAnswer: 'B',
@@ -86,7 +74,7 @@ export const dayTwentyThreeQuiz: QuizDefinition = {
         },
         {
           id: 'D',
-          label: 'data 是 JSON 字串，必須先 JSON.parse',
+          label: 'safeParse 直接回傳題目物件，應改成 result.prompt',
         },
       ],
       correctAnswer: 'C',
