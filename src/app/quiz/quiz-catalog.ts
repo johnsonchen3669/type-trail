@@ -183,7 +183,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-23.data').then((module) => module.dayTwentyThreeQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 24,
     title: 'API 型別設計：一份題目需要幾種資料？',
     loadQuiz: () => import('./day-24.data').then((module) => module.dayTwentyFourQuiz),
