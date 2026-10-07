@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const dayTwentyFourQuiz: QuizDefinition = {
   id: 'day-24',
   day: 24,
-  title: 'API 型別設計：一份題目需要幾種資料？',
+  title: 'API 型別設計：依用途拆分型別',
   estimatedMinutes: 12,
   questions: [
     {
