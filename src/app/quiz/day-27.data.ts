@@ -111,7 +111,7 @@ export const dayTwentySevenQuiz: QuizDefinition = {
       learningGoal: '把找不到題目轉為明確結果',
       prompt: '依本文修正版的結果契約，補上題目不存在時的錯誤代碼。',
       hint: '這個分支在判分之前結束，不應當成答錯。',
-      code: 'const question = await repository.findById(raw.questionId);\nif (question === null) {\n  return { ok: false, code: "____" };\n}',
+      code: 'const question = await repository.findById(answer.questionId);\nif (question === null) {\n  return { ok: false, code: "____" };\n}',
       acceptedAnswers: ['QUESTION_NOT_FOUND'],
       explanation: '明確錯誤代碼讓呼叫端區分題目不存在與答錯。',
     },

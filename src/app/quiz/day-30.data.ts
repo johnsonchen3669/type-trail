@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const dayThirtyQuiz: QuizDefinition = {
   id: 'day-30',
   day: 30,
-  title: 'MCP 與 AI 代理：把工具接進應用程式',
+  title: 'MCP：連接工具與 AI 應用程式',
   estimatedMinutes: 12,
   questions: [
     {

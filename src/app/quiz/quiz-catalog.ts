@@ -186,6 +186,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 24,
     title: 'API 型別設計：一份題目需要幾種資料？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/api-type-design/',
     loadQuiz: () => import('./day-24.data').then((module) => module.dayTwentyFourQuiz),
   },
   {
@@ -221,7 +222,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'coming-soon',
     day: 30,
-    title: 'MCP 與 AI 代理：把工具接進應用程式',
+    title: 'MCP：連接工具與 AI 應用程式',
     loadQuiz: () => import('./day-30.data').then((module) => module.dayThirtyQuiz),
   },
 ];
