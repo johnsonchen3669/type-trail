@@ -12,7 +12,7 @@ export const dayTwentyFiveQuiz: QuizDefinition = {
       kind: 'choice',
       learningGoal: '區分答錯與判分失敗',
       prompt:
-        '使用者選了有效選項，但答案不正確；另一筆作答的題目已不存在。哪個描述符合本文的結果契約？',
+        '題目存在，但使用者填的答案不正確；另一筆作答的題目已不存在。哪個描述符合本文的結果契約？',
       hint: '判分有沒有完成，是判斷這兩種情況的起點。',
       options: [
         {
@@ -34,45 +34,47 @@ export const dayTwentyFiveQuiz: QuizDefinition = {
       ],
       correctAnswer: 'B',
       explanation:
-        '有效選項已完成判分，答錯仍是成功的判分結果；題目不存在時無法判分，應回傳明確失敗。',
+        '題目存在時可以完成判分，答錯仍是成功的判分結果；題目不存在時無法判分，應回傳明確失敗。',
     },
     {
       id: 'day-25-02',
       number: 2,
       kind: 'choice',
-      learningGoal: '依結果聯集辨識可用欄位',
-      prompt: '以下 result.ok 為 false。TypeScript 在 else 分支允許直接讀取哪個欄位？',
-      hint: 'ok 會把結果縮小到哪個分支？',
-      code: 'type GradeResult =\n  | { ok: true; correct: boolean }\n  | { ok: false; error: { code: "INVALID_OPTION" } };\n\nfunction show(result: GradeResult) {\n  if (result.ok) return result.correct;\n  return result.____;\n}',
+      learningGoal: '判斷拋出錯誤後的執行流程',
+      prompt: '使用本文的 gradeOrThrow，題目陣列是空的。這段程式依序印出什麼？',
+      hint: '發生 throw 後，程式會跳到哪裡？離開 catch 後還有哪些程式？',
+      code: 'const questions: QuestionEntity[] = [];\n\ntry {\n  gradeOrThrow({ questionId: "q25", answer: "const" }, questions);\n  console.log("完成");\n} catch (error) {\n  console.log("失敗");\n}\n\nconsole.log("結束");',
       options: [
         {
           id: 'A',
-          label: 'correct',
+          label: '完成、結束',
         },
         {
           id: 'B',
-          label: 'error.code',
+          label: '失敗、結束',
         },
         {
           id: 'C',
-          label: 'options.length',
+          label: '完成、失敗、結束',
         },
         {
           id: 'D',
-          label: 'message',
+          label: '只有失敗',
         },
       ],
       correctAnswer: 'B',
-      explanation: 'ok: false 分支有 error.code；correct 只存在於成功分支。',
+      explanation:
+        '找不到題目時，gradeOrThrow 拋出錯誤，跳過「完成」並進入 catch 印出「失敗」。這裡的 catch 沒有再次拋出錯誤，因此後面繼續印出「結束」。',
     },
     {
       id: 'day-25-03',
       number: 3,
       kind: 'choice',
       learningGoal: '辨識 null 無法表達失敗原因',
-      prompt: '下列函式可能因題目不存在、選項無效而回傳 null。呼叫端最直接遇到什麼問題？',
+      prompt:
+        '某個判分函式在題目不存在或題目尚未開放作答時，都回傳 null。只看下面的回傳型別，呼叫端會遇到什麼問題？',
       hint: '呼叫端只拿到 null，能否知道下一步該顯示什麼？',
-      code: 'function gradeAnswer(answer: AnswerInput): boolean | null {\n  // 題目不存在或選項無效時都回傳 null\n  return null;\n}',
+      code: 'type GradeFunction = (questionId: string, answer: string) => boolean | null;',
       options: [
         {
           id: 'A',
@@ -108,12 +110,12 @@ export const dayTwentyFiveQuiz: QuizDefinition = {
       id: 'day-25-05',
       number: 5,
       kind: 'code-fill',
-      learningGoal: '對選項索引執行整數檢查',
-      prompt: '依本文做法，補上檢查選項位置是否為整數的方法名稱，不含括號。',
-      hint: 'number 型別仍可能包含非整數。',
-      code: 'if (!Number.____(answer.optionIndex)) {\n  return { ok: false, error: { code: "INVALID_OPTION", message: "選項位置無效" } };\n}',
-      acceptedAnswers: ['isInteger'],
-      explanation: 'Number.isInteger 在執行時檢查值是否為整數；仍需另外檢查它是否落在選項範圍內。',
+      learningGoal: '建立結果型別中的失敗分支',
+      prompt: '使用本文的 GradeResult，補上找不到題目時的 ok 值。',
+      hint: '這次判分是否已經完成？應回傳哪一種分支？',
+      code: 'if (!question) {\n  return {\n    ok: ____,\n    error: { code: "QUESTION_NOT_FOUND", message: "找不到這道題目" },\n  };\n}',
+      acceptedAnswers: ['false'],
+      explanation: '失敗分支使用 ok: false，並提供錯誤資訊，讓呼叫端先判斷分支再讀取原因。',
     },
   ],
 };

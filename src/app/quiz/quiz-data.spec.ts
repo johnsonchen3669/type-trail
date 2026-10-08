@@ -260,7 +260,7 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-25-02': 'B',
       'day-25-03': 'B',
       'day-25-04': 'QUESTION_NOT_FOUND',
-      'day-25-05': 'isInteger',
+      'day-25-05': 'false',
     },
   ],
   [
