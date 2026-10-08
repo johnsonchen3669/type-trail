@@ -3,7 +3,7 @@ import { QuizDefinition } from './quiz.models';
 export const dayTwentyFiveQuiz: QuizDefinition = {
   id: 'day-25',
   day: 25,
-  title: '錯誤也是型別：讓判分失敗有明確結果',
+  title: '錯誤處理：用型別描述成功與失敗',
   estimatedMinutes: 12,
   questions: [
     {

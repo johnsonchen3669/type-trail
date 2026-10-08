@@ -192,7 +192,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 25,
-    title: '錯誤也是型別：讓判分失敗有明確結果',
+    title: '錯誤處理：用型別描述成功與失敗',
     articleUrl: 'https://johnsonchen.dev/blog/typescript/result-pattern/',
     loadQuiz: () => import('./day-25.data').then((module) => module.dayTwentyFiveQuiz),
   },
