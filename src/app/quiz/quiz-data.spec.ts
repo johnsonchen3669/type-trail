@@ -269,8 +269,8 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-26-01': 'A',
       'day-26-02': 'B',
       'day-26-03': 'B',
-      'day-26-04': 'metadata',
-      'day-26-05': 'inject',
+      'day-26-04': '函式',
+      'day-26-05': 'Injectable',
     },
   ],
   [

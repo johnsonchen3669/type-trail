@@ -199,7 +199,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 26,
-    title: '類別、裝飾器與依賴注入：讀懂 Angular 的程式結構',
+    title: '裝飾器：從自訂函式到 Angular 的用法',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/decorators/',
     loadQuiz: () => import('./day-26.data').then((module) => module.dayTwentySixQuiz),
   },
   {
