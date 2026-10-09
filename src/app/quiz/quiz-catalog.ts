@@ -204,7 +204,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-26.data').then((module) => module.dayTwentySixQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 27,
     title: '如何審查 AI 生成的 TypeScript？',
     loadQuiz: () => import('./day-27.data').then((module) => module.dayTwentySevenQuiz),
