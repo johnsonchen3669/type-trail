@@ -207,6 +207,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     status: 'published',
     day: 27,
     title: '如何審查 AI 生成的 TypeScript？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/review-ai-generated-code/',
     loadQuiz: () => import('./day-27.data').then((module) => module.dayTwentySevenQuiz),
   },
   {
