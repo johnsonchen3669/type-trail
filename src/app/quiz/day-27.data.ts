@@ -1,119 +1,121 @@
 import { QuizDefinition } from './quiz.models';
 
 export const dayTwentySevenQuiz: QuizDefinition = {
-  id: 'day-27',
-  day: 27,
-  title: '如何審查 AI 生成的 TypeScript？',
-  estimatedMinutes: 12,
-  questions: [
+  "id": "day-27",
+  "day": 27,
+  "title": "如何審查 AI 生成的 TypeScript？",
+  "estimatedMinutes": 12,
+  "questions": [
     {
-      id: 'day-27-01',
-      number: 1,
-      kind: 'choice',
-      learningGoal: '選出生成程式碼審查的有效順序',
-      prompt: '收到一段自稱能判分的 TypeScript，哪種驗收方式最符合本文？',
-      hint: '先看現有函式簽名，再看執行時輸入與失敗案例。',
-      options: [
+      "kind": "choice",
+      "learningGoal": "區分工具的檢查責任",
+      "prompt": "請 AI 寫驗證函式時，Prompt、Zod 與 Vitest 如何配合？",
+      "hint": "分開看工作說明、資料入口與執行案例。",
+      "options": [
         {
-          id: 'A',
-          label: '只確認程式含有型別標註，就可視為安全',
+          "id": "A",
+          "label": "Prompt 完整就能省略測試"
         },
         {
-          id: 'B',
-          label: '先對照需求與既有契約，再編譯、查資料邊界，最後用成功與失敗案例驗收',
+          "id": "B",
+          "label": "Prompt 說明需求，Zod 驗證資料，Vitest 比較結果與預期"
         },
         {
-          id: 'C',
-          label: '只測答對一題，其他分支等使用者回報',
+          "id": "C",
+          "label": "Zod 檢查 AI 寫的每一行程式"
         },
         {
-          id: 'D',
-          label: '把每個值加上 as，讓編譯器不要阻擋驗收',
-        },
+          "id": "D",
+          "label": "Vitest 通過後就能移除入口驗證"
+        }
       ],
-      correctAnswer: 'B',
-      explanation:
-        '編譯只能查已宣告的型別關係；審查還須核對實際 API、外部資料、缺值、結果契約與失敗案例。',
+      "correctAnswer": "B",
+      "explanation": "Prompt 說明功能與規則，Zod 在執行時驗證資料，Vitest 用案例檢查程式行為。",
+      "id": "day-27-01",
+      "number": 1
     },
     {
-      id: 'day-27-02',
-      number: 2,
-      kind: 'choice',
-      learningGoal: '依既有介面辨認不存在的方法',
-      prompt: '依下列已宣告的介面，TypeScript 會對哪一行報錯？',
-      hint: '比較方法的完整名稱。',
-      code: 'interface QuestionRepository {\n  findById(id: string): Promise<QuestionEntity | null>;\n}\n\nasync function load(repo: QuestionRepository) {\n  return repo.getById("q-1");\n}',
-      options: [
+      "kind": "choice",
+      "learningGoal": "從驗證規則判斷輸入是否可接受",
+      "prompt": "補上 1～10 的限制後，下列輸入會通過驗證嗎？",
+      "hint": "除了範圍，也要看數量是否符合整數要求。",
+      "options": [
         {
-          id: 'A',
-          label: 'findById 的宣告，因為它回傳 Promise',
+          "id": "A",
+          "label": "true，因為 2.5 在範圍內"
         },
         {
-          id: 'B',
-          label: 'repo.getById("q-1")，因為介面沒有 getById',
+          "id": "B",
+          "label": "false，因為數量必須是整數"
         },
         {
-          id: 'C',
-          label: '"q-1"，因為字串不能當編號',
+          "id": "C",
+          "label": "true，因為數量是 number"
         },
         {
-          id: 'D',
-          label: 'async function，因為函式不能讀取介面',
-        },
+          "id": "D",
+          "label": "false，因為備註不能是空字串"
+        }
       ],
-      correctAnswer: 'B',
-      explanation:
-        '既有契約只宣告 findById；getById 是沒有根據的 API 名稱，應先對照介面或第一方文件。',
+      "correctAnswer": "B",
+      "explanation": "2.5 在 1～10 之間，但不是整數，因此印出 false。",
+      "code": "const schema = z.object({\n  pizzaId: z.string(),\n  quantity: z.number().int().min(1).max(10),\n  note: z.string(),\n});\nconsole.log(schema.safeParse({\n  pizzaId: \"margherita\", quantity: 2.5, note: \"\",\n}).success);",
+      "id": "day-27-02",
+      "number": 2
     },
     {
-      id: 'day-27-03',
-      number: 3,
-      kind: 'choice',
-      learningGoal: '辨認斷言與非空斷言留下的 Runtime 風險',
-      prompt: '以下程式即使修正方法名稱，還有哪些風險？',
-      hint: 'as 有沒有讀取資料？! 有沒有在執行時建立題目？',
-      code: 'const answer = raw as AnswerInput;\nconst question = await repository.findById(answer.questionId);\nreturn question!.correctOptionIndex === answer.optionIndex;',
-      options: [
+      "kind": "choice",
+      "learningGoal": "辨識需求定義與測試結果的落差",
+      "prompt": "Prompt 只要求用 Zod 驗證並寫測試，AI 採用下面的數量規則。若網站實際要求數量為 1～10，應如何調整？",
+      "hint": "看 Prompt 有沒有交代一次能買幾個。",
+      "options": [
         {
-          id: 'A',
-          label: 'as 與 ! 都會在執行時驗證資料，沒有風險',
+          "id": "A",
+          "label": "測試已通過，直接使用這個版本"
         },
         {
-          id: 'B',
-          label: 'raw 未驗證，且找不到題目時仍可能讀取 null 的欄位',
+          "id": "B",
+          "label": "只把測試期待值改成 false，維持程式"
         },
         {
-          id: 'C',
-          label: 'await 會把題目自動轉成字串',
+          "id": "C",
+          "label": "補充 Prompt 的數量範圍，再調整驗證規則與測試"
         },
         {
-          id: 'D',
-          label: 'correctOptionIndex 會自動檢查選項範圍',
-        },
+          "id": "D",
+          "label": "使用 as 將數量指定成 1～10"
+        }
       ],
-      correctAnswer: 'B',
-      explanation: '型別斷言與非空斷言不會驗證輸入，也不會消除執行時的 null。',
+      "correctAnswer": "C",
+      "explanation": "先把 1～10 的限制告訴 AI，再請它一起修改程式和測試，讓兩者都依照實際需求檢查。",
+      "code": "const QuantitySchema = z.number().int();\nconsole.log(QuantitySchema.safeParse(11).success); // true",
+      "id": "day-27-03",
+      "number": 3
     },
     {
-      id: 'day-27-04',
-      number: 4,
-      kind: 'exact-text',
-      learningGoal: '辨識未驗證外部輸入的起始型別',
-      prompt: '本文讓尚未驗證的作答資料進入 checkAnswer 時，參數使用哪個型別？',
-      hint: '呼叫端可能送來任何值，程式必須先檢查才能讀取欄位。',
-      acceptedAnswers: ['unknown'],
-      explanation: 'unknown 讓資料先進入程式，但要求透過檢查函式證明其形狀後才能安全使用。',
+      "kind": "exact-text",
+      "learningGoal": "核對失敗結果與畫面的接法",
+      "prompt": "AI 把驗證失敗的回傳欄位改成 messages，畫面卻仍讀取 result.errors。依本文 Demo 的格式，應請 AI 把失敗提示放回哪個欄位？",
+      "hint": "驗證函式回傳的欄位，要和畫面讀取的欄位對得上。",
+      "acceptedAnswers": [
+        "errors"
+      ],
+      "explanation": "Demo 用 errors 放失敗提示。修改驗證時，要保留畫面使用的回傳格式，或同步修改畫面的接法。",
+      "id": "day-27-04",
+      "number": 4
     },
     {
-      id: 'day-27-05',
-      number: 5,
-      kind: 'code-fill',
-      learningGoal: '把找不到題目轉為明確結果',
-      prompt: '依本文修正版的結果契約，補上題目不存在時的錯誤代碼。',
-      hint: '這個分支在判分之前結束，不應當成答錯。',
-      code: 'const question = await repository.findById(answer.questionId);\nif (question === null) {\n  return { ok: false, code: "____" };\n}',
-      acceptedAnswers: ['QUESTION_NOT_FOUND'],
-      explanation: '明確錯誤代碼讓呼叫端區分題目不存在與答錯。',
-    },
-  ],
+      "kind": "code-fill",
+      "learningGoal": "確認資料經過 Schema 驗證",
+      "prompt": "檢查 AI 的程式是否真的使用 Schema 驗證輸入，補上本文的驗證方法。",
+      "hint": "這個方法回傳的結果可以用 success 判斷驗證是否通過。",
+      "acceptedAnswers": [
+        "safeParse"
+      ],
+      "explanation": "safeParse 會依 Schema 檢查輸入，並回傳成功或失敗結果。",
+      "code": "const result = CartSchema.____(raw);\nif (!result.success) {\n  // 整理錯誤提示\n}",
+      "id": "day-27-05",
+      "number": 5
+    }
+  ]
 };
