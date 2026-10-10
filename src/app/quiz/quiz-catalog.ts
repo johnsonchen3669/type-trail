@@ -211,7 +211,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-27.data').then((module) => module.dayTwentySevenQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 28,
     title: 'Structured Output：讓 AI 回傳可驗證的題目資料',
     loadQuiz: () => import('./day-28.data').then((module) => module.dayTwentyEightQuiz),
