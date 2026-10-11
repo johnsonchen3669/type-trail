@@ -218,7 +218,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-28.data').then((module) => module.dayTwentyEightQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 29,
     title: '工具呼叫：讓 AI 透過程式完成操作',
     loadQuiz: () => import('./day-29.data').then((module) => module.dayTwentyNineQuiz),
