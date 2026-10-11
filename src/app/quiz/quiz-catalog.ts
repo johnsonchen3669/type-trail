@@ -213,7 +213,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 28,
-    title: 'Structured Output：讓 AI 回傳可驗證的題目資料',
+    title: '讓 AI 依規格寫 TypeScript：用 Zod 與測試驗收',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/ai-code-contracts/',
     loadQuiz: () => import('./day-28.data').then((module) => module.dayTwentyEightQuiz),
   },
   {

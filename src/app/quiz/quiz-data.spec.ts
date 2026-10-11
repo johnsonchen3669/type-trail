@@ -289,8 +289,8 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
       'day-28-01': 'B',
       'day-28-02': 'B',
       'day-28-03': 'A',
-      'day-28-04': 'refused',
-      'day-28-05': '>=',
+      'day-28-04': 'unknown',
+      'day-28-05': 'ok',
     },
   ],
   [dayTwentyNineQuiz, {
