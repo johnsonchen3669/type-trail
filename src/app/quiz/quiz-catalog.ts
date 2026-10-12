@@ -225,7 +225,7 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
     loadQuiz: () => import('./day-29.data').then((module) => module.dayTwentyNineQuiz),
   },
   {
-    status: 'coming-soon',
+    status: 'published',
     day: 30,
     title: 'MCP：連接工具與 AI 應用程式',
     loadQuiz: () => import('./day-30.data').then((module) => module.dayThirtyQuiz),
