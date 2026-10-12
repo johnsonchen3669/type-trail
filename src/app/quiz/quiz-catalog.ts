@@ -220,7 +220,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 29,
-    title: '工具呼叫：讓 AI 透過程式完成操作',
+    title: '擴充專案：用 ESLint 檢查 AI 寫的程式',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/ai-feature-contracts/',
     loadQuiz: () => import('./day-29.data').then((module) => module.dayTwentyNineQuiz),
   },
   {
