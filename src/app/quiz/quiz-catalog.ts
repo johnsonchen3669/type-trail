@@ -227,7 +227,8 @@ export const quizCatalog: readonly QuizCatalogEntry[] = [
   {
     status: 'published',
     day: 30,
-    title: 'MCP：連接工具與 AI 應用程式',
+    title: '回頭看，TypeScript 幫我們解決了什麼？',
+    articleUrl: 'https://johnsonchen.dev/blog/typescript/project-integration/',
     loadQuiz: () => import('./day-30.data').then((module) => module.dayThirtyQuiz),
   },
 ];

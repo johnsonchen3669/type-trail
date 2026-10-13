@@ -34,7 +34,7 @@ describe('App routing', () => {
     }).compileComponents();
 
     const fixture = TestBed.createComponent(App);
-    await TestBed.inject(Router).navigateByUrl('/day/30');
+    await TestBed.inject(Router).navigateByUrl('/day/31');
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();

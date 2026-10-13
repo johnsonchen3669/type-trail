@@ -301,11 +301,11 @@ const quizCases: readonly [QuizDefinition, Record<string, string>][] = [
     'day-29-05': '"not_found"',
   }],
   [dayThirtyQuiz, {
-    'day-30-01': 'C',
+    'day-30-01': 'B',
     'day-30-02': 'B',
-    'day-30-03': 'D',
-    'day-30-04': 'structuredContent',
-    'day-30-05': 'isError',
+    'day-30-03': 'A',
+    'day-30-04': 'unknown',
+    'day-30-05': '"success"',
   }],
   [dayTwentyThreeQuiz, {
     'day-23-01': 'B',
